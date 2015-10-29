@@ -1,0 +1,55 @@
+.delete-img, .edit-img {
+    width: 16px;
+    height: 16px;
+}
+
+.button {
+    width: 140px;
+    height: 30px;
+}
+
+.welcome {
+    color: white;
+}
+
+.login_box {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+#error-msg {
+    color: red;
+}
+
+.centered {
+    text-align: center;
+}
+
+.even {
+    background-color: #98ccff;
+}
+
+.odd {
+    background-color: #d4f1ff;
+}
+
+.displayTable {
+    width: 100%;
+    text-align: center;
+}
+
+.displayTable thead {
+    background-color: #235ba8;
+    color: white;
+    font-weight: bold;
+    font-size: 10pt;
+}
+
+.id_col, .contact_col, .edit_col, .delete_col {width: 45px;}
+
+p {
+    padding: 0 10px 0 10px;
+    text-align: justify;
+}
