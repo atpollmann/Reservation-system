@@ -1,0 +1,117 @@
+<project name="fcbarcelonaonline" basedir="." default="package">
+
+    <property file="build.properties"/>
+
+    <description>
+        build file for fcbarcelonaonline project - cc5604 task2
+    </description>
+
+    <!-- clean -->
+    <target name="clean" description="delete (recursively) output folders">
+        <delete dir="${output.base}"/>
+    </target>
+
+    <!-- init -->
+    <target name="init" depends="clean" description="create initial folders for binary output">
+        <mkdir dir="${output.base}"/>
+        <mkdir dir="${output.artifacts}"/>
+        <mkdir dir="${output.production}"/>
+        <mkdir dir="${output.test}"/>
+    </target>
+
+    <!-- project lib -->
+    <path id="projectlib_test" description="test-specific libraries (such as junit and its dependencies)">
+        <fileset file="${libs.global}/*.jar"/>
+    </path>
+
+    <path id="projectlib" description="application-specific libraries (such as j2ee, spring, hibernate, etc.)">
+        <fileset file="${libs.server}/*.jar"/>
+    </path>
+
+    <!-- compile -->
+    <target name="compile" depends="init" description="compile the source into .class files">
+
+        <!-- modulo cliente -->
+        <mkdir dir="${output.production}/client"/>
+        <javac includeantruntime="${ant.runtime}" executable="${sdk.path}/bin/javac" srcdir="${src.client}" destdir="${output.production}/client">
+            <classpath refid="projectlib"/>
+        </javac>
+
+        <!-- test cliente -->
+        <mkdir dir="${output.test}/client"/>
+        <javac includeantruntime="${ant.runtime}" executable="${sdk.path}/bin/javac" srcdir="${test.client}" destdir="${output.test}/client">
+            <classpath location="${output.production}/client"/>
+            <classpath refid="projectlib"/>
+            <classpath refid="projectlib_test"/>
+        </javac>
+
+        <!-- modulo server -->
+        <mkdir dir="${output.production}/server"/>
+
+        <javac includeantruntime="${ant.runtime}" executable="${sdk.path}/bin/javac" srcdir="${src.server}" destdir="${output.production}/server">
+            <classpath refid="projectlib"/>
+            <classpath location="${output.production}/client"/>
+        </javac>
+
+        <!-- test server -->
+        <mkdir dir="${output.test}/server"/>
+        <javac includeantruntime="${ant.runtime}" executable="${sdk.path}/bin/javac" srcdir="${test.server}" destdir="${output.test}/server">
+            <classpath location="${output.production}/client"/>
+            <classpath location="${output.production}/server"/>
+            <classpath location="${output.test}/client"/>
+
+            <classpath refid="projectlib"/>
+            <classpath refid="projectlib_test"/>
+        </javac>
+
+    </target>
+
+    <!-- test -->
+    <target name="test" depends="compile" if="${test.run}">
+
+        <junit includeantruntime="${ant.runtime}" printsummary="yes" haltonfailure="yes" showoutput="no">
+            <classpath location="${output.production}/client"/>
+            <classpath location="${output.production}/server"/>
+            <classpath location="${output.test}/client"/>
+            <classpath location="${output.test}/server"/>
+            <classpath location="${src.server}"/>
+            <classpath location="${webinf.path}"/>
+
+            <classpath refid="projectlib"/>
+            <classpath refid="projectlib_test"/>
+
+            <formatter type="plain" usefile="${test.usefile}"/>
+
+            <test name="${test.entrypoint}"/>
+        </junit>
+
+    </target>
+
+    <!-- package -->
+    <target name="package" depends="test" description="creates file ready to be deployed">
+
+        <!-- copiar archivos de configuracion a carpeta que contiene los .class -->
+        <copy file="${applicationcontext.path}" todir="${output.production}/server"/>
+        <copy file="${log4j.path}" todir="${output.production}/server"/>
+
+        <!-- copiar condicionalmente un archivo u otro -->
+        <copy file="application-db-${database.config}.properties" tofile="${output.production}/server/application-db.properties"/>
+
+        <!-- crear modulo web -->
+        <war destfile="${output.artifacts}/${war.filename}">
+            <lib dir="${libs.server}"/>
+
+            <classes dir="${output.production}/client"/>
+            <classes dir="${output.production}/server" excludes="*.xml,*.properties"/>
+            <classes dir="${output.production}/server" includes="*.xml,*.properties"/>
+
+            <fileset dir="${webcontent.path}"/> <!-- ya contiene web-inf -->
+        </war>
+
+        <!-- crear modulo empresarial -->
+        <ear destfile="${output.artifacts}/${ear.filename}" appxml="${appxml.path}">
+            <fileset dir="${output.artifacts}" includes="*.war,*.jar"/>
+        </ear>
+    </target>
+
+</project>
