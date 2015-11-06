@@ -19,7 +19,7 @@
                 var usrStr = $.trim($(this).val());
                 if(usrStr && usrStr!=fxLastUsername()){
                     $.post('availableUsername', {username:usrStr}, function(data, textStatus, jqXHR){
-                        showError()
+                        showError();
                         if(data == 'yes'){
                             showMsg(span, 'Usuario disponible.', input);
                         }else{

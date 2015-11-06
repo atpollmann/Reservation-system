@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="cl.cc5604.fcbarcelonaonline.util.RequestHelper" %>
+<%@ page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,13 +41,9 @@
         switch (m) {
             case -1: %><jsp:include page="error.jsp"/><% break;
             case 0: %><jsp:include page="main.jsp"/><% break;
-            case 1: %><jsp:include page="active.jsp"/><% break;
             case 2: %><jsp:include page="associate.jsp"/><% break;
             case 8: %><jsp:include page="contact.jsp"/><% break;
             case 3: %><jsp:include page="contract.jsp"/><% break;
-            case 4: %><jsp:include page="finances.jsp"/><% break;
-            case 5: %><jsp:include page="passive.jsp"/><% break;
-            case 6: %><jsp:include page="staff.jsp"/><% break;
             case 7: %><jsp:include page="user.jsp"/><% break;
         }
     %>

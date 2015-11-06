@@ -68,7 +68,7 @@
 
     <servlet>
         <servlet-name>captcha</servlet-name>
-        <servlet-class>cl.cc5604.fcbarcelonaonline.business.application.captcha.CageCaptchaServlet</servlet-class>
+        <servlet-class>cl.usach.ingesoft.agendator.util.business.application.captcha.CageCaptchaServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

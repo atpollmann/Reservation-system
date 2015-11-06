@@ -234,8 +234,6 @@
                 <display:column property="formattedInitDate" title="Fecha Inicio"/>
                 <display:column property="formattedExpirationDate" title="Fecha Fin"/>
                 <display:column property="formattedMonthlyPayment" title="Mensualidad (CLP)"/>
-                <display:column property="formattedHooked2staff" title="Asociado a Personal"/>
-                <display:column property="formattedHooked2associate" title="Asociado a Socio"/>
                 <display:column title="Editar" class="edit_col">
                     <a href="#"
                        onclick="return editContract(${contractTable.id},'${contractTable.formattedInitDate}','${contractTable.formattedExpirationDate}','${contractTable.monthlyPayment}');">

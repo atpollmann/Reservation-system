@@ -1,15 +1,13 @@
 /*  Credit: http://www.templatemo.com	*/
 
 body {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	color: #333;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 13px;
-	line-height: 1.7em; 
-	background-color: #bbb;
-	background-repeat: repeat-x;
-	background-position: top	
+	line-height: 1.7em;
+    background: #bbb repeat-x top;
 }
 
 .homepage { background-image: url(../images/templatemo_body.jpg) }
@@ -80,7 +78,7 @@ a.more:hover { text-decoration: none; color: #fff; background: url(../images/tem
 #site_title { float: left; }
 #site_title h1 { margin: 25px 0 0 0; padding: 0 }
 #site_title h1 a { display: block; width: 350px; height: 38px; color: #fff; text-indent: -10000px; background: url(../images/templatemo_logo.png) no-repeat }
-#site_title h1 span { display: block; text-align: left; padding: 0px 0px 0px 10px; font-size: 12px; color: #fff }
+#site_title h1 span { display: block; text-align: left; padding: 0 0 0 10px; font-size: 12px; color: #fff }
 
 #search_box { float: right; text-align: right; margin: 40px 0 0 0; width: 180px; height: 26px; /*background: url(images/templatemo_search.jpg) no-repeat*/ }
 #search_box form { clear: both; width: 240px; height: 26px; padding: 0; margin: 0 } 
@@ -101,8 +99,8 @@ a.more:hover { text-decoration: none; color: #fff; background: url(../images/tem
 }
 
 #templatemo_menu ul li {
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	display: inline;
 }
 
@@ -220,7 +218,7 @@ a.more:hover { text-decoration: none; color: #fff; background: url(../images/tem
 .post_box a.more { float: right; }
 
 #cp_contact_form { padding: 0; width: 400px }
-#cp_contact_form form { margin: 0px; padding: 0px; }
+#cp_contact_form form { margin: 0; padding: 0; }
 
 #cp_contact_form form .input_field { 
 	width: 400px; 
@@ -245,7 +243,7 @@ a.more:hover { text-decoration: none; color: #fff; background: url(../images/tem
 	font-family: Tahoma, Geneva, sans-serif;
 }
 
-#cp_contact_form form .submit_btn { margin: 10px 0px; padding: 5px 14px; border: 1px solid #ccc; background: #fff; }
+#cp_contact_form form .submit_btn { margin: 10px 0; padding: 5px 14px; border: 1px solid #ccc; background: #fff; }
 
 #map img { width: 270px; height: 160px; border: 1px solid #999; padding: 4px }
 

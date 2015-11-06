@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ArtifactManager">
-    <artifact type="exploded-war" name="fcbarcelonaonline:war exploded">
-      <output-path>$PROJECT_DIR$/out/artifacts/fcbarcelonaonline_war_exploded</output-path>
+    <artifact type="exploded-war" name="agendator:war exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/agendator_war_exploded</output-path>
       <root id="root">
         <element id="directory" name="WEB-INF">
           <element id="directory" name="classes">
@@ -17,19 +17,18 @@
         <element id="javaee-facet-resources" facet="server/web/Web" />
       </root>
     </artifact>
-    <artifact type="exploded-ear" name="fcbarcelonaonline:ear exploded">
-      <output-path>$PROJECT_DIR$/out/artifacts/fcbarcelonaonline_ear_exploded</output-path>
+    <artifact type="exploded-ear" name="agendator:ear exploded">
+      <output-path>$PROJECT_DIR$/out/artifacts/agendator_ear_exploded</output-path>
       <root id="root">
         <element id="directory" name="fcbarcelonaonline.war">
-          <element id="artifact" artifact-name="fcbarcelonaonline:war exploded" />
+          <element id="artifact" artifact-name="agendator:war exploded" />
         </element>
-        <element id="javaee-facet-resources" facet="server/javaeeApplication/javaEEApplication" />
       </root>
     </artifact>
-    <artifact type="ear" name="fcbarcelonaonline:ear">
-      <output-path>$PROJECT_DIR$/out/artifacts/fcbarcelonaonline_ear</output-path>
+    <artifact type="ear" name="agendator:ear">
+      <output-path>$PROJECT_DIR$/out/artifacts/agendator_ear</output-path>
       <root id="archive" name="fcbarcelonaonline.ear">
-        <element id="artifact" artifact-name="fcbarcelonaonline:ear exploded" />
+        <element id="artifact" artifact-name="agendator:ear exploded" />
       </root>
     </artifact>
   </component>
@@ -55,16 +54,12 @@
     </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="" />
-  <component name="DataSourceManagerImpl" format="xml" hash="841683195">
+  <component name="DataSourceManagerImpl" format="xml" hash="683477441">
     <data-source source="LOCAL" name="MySQL - fcbarcelonaonline@localhost" uuid="2f840ecd-6ffb-45e0-a6b0-d51e2e7d647a">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/fcbarcelonaonline</jdbc-url>
-      <user-name>root</user-name>
-      <user-password>df9bdf98df99df9edf9f</user-password>
-      <schema-pattern>fcbarcelonaonline.*</schema-pattern>
-      <default-schemas>fcbarcelonaonline.*</default-schemas>
       <driver-properties>
         <property name="zeroDateTimeBehavior" value="convertToNull" />
         <property name="tinyInt1isBit" value="false" />
@@ -245,7 +240,7 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">
@@ -259,6 +254,13 @@
     <option name="selectedProfile" value="" />
     <option name="autoscroll" value="false" />
     <option name="showOnlyWarnings" value="false" />
+  </component>
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - fcbarcelonaonline@localhost" uuid="2f840ecd-6ffb-45e0-a6b0-d51e2e7d647a">
+      <user-name>root</user-name>
+      <schema-pattern>fcbarcelonaonline.*</schema-pattern>
+      <default-schemas>fcbarcelonaonline.*</default-schemas>
+    </data-source>
   </component>
   <component name="libraryTable">
     <library name="project-libs">
@@ -321,10 +323,12 @@
         <root url="jar://$PROJECT_DIR$/server/lib/commons-discovery-0.5.jar!/" />
         <root url="jar://$PROJECT_DIR$/server/lib/commons-lang-2.6.jar!/" />
         <root url="jar://$PROJECT_DIR$/server/lib/commons-collections-3.2.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/mockito-all-1.9.5.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/mockito-all-1.9.5.jar!/" />
+      </SOURCES>
     </library>
   </component>
 </project>
-

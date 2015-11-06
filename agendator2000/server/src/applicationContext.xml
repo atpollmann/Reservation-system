@@ -18,7 +18,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="cl.cc5604.fcbarcelonaonline.*"/>
+    <context:component-scan base-package="cl.usach.ingesoft.agendator.*"/>
 
     <!-- ########################################## Data Sources ########################################## -->
 
@@ -35,7 +35,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="cl.cc5604.fcbarcelonaonline.entity"/>
+        <property name="packagesToScan" value="cl.usach.ingesoft.agendator.entity"/>
         <property name="hibernateProperties" >
             <props>
                 <prop key="hibernate.hbm2ddl.auto">${database.hbm2ddl.auto}</prop>
@@ -94,7 +94,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <property name="loginFormUrl" value="/login.html"/>
     </bean>
 
-    <bean id="usernamePasswordAuthenticationFilter" class="cl.cc5604.fcbarcelonaonline.business.application.ExUsernamePasswordAuthenticationFilter">
+    <bean id="usernamePasswordAuthenticationFilter" class="cl.usach.ingesoft.agendator.util.business.application.ExUsernamePasswordAuthenticationFilter">
         <property name="filterProcessesUrl" value="/loginProcess"/>
         <property name="authenticationSuccessHandler" ref="customAuthenticationSuccessHandler"/>
         <property name="authenticationFailureHandler" ref="customAuthenticationFailureHandler"/>
@@ -118,6 +118,6 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <!-- #################################### DB bootstrap ############################################# -->
 
     <!-- Listener para datos iniciales -->
-    <bean id="eventListenerBean" class="cl.cc5604.fcbarcelonaonline.business.application.ApplicationListenerBean" />
+    <bean id="eventListenerBean" class="cl.usach.ingesoft.agendator.util.business.application.ApplicationListenerBean" />
 
 </beans>
