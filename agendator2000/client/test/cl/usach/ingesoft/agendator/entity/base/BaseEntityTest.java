@@ -1,10 +1,9 @@
 package cl.usach.ingesoft.agendator.entity.base;
 
 import cl.usach.ingesoft.agendator.common.BusinessException;
-import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
-import cl.usach.ingesoft.agendator.util.OmitInComparison;
-import cl.usach.ingesoft.agendator.util.OmitInHashcode;
-import cl.usach.ingesoft.agendator.util.OmitInToString;
+import cl.usach.ingesoft.agendator.view.util.OmitInComparison;
+import cl.usach.ingesoft.agendator.view.util.OmitInHashcode;
+import cl.usach.ingesoft.agendator.view.util.OmitInToString;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,7 +88,7 @@ public class BaseEntityTest {
     }
 
     @Test
-    public void listFieldsWithAnnotationTest() {
+    public void testListFieldsWithAnnotation() {
         assertEquals(makeList("x", "y"), BaseEntity.listFieldsWithAnnotation(A.class, Foo.class));
         assertEquals(makeList("x"), BaseEntity.listFieldsWithAnnotation(B.class, Foo.class));
         assertEquals(makeList(), BaseEntity.listFieldsWithAnnotation(C.class, Foo.class));
@@ -131,7 +130,7 @@ public class BaseEntityTest {
     private H5 h5;
 
     @Test
-    public void hashCodeTest() {
+    public void testHashCode() {
         assertNotNull(h1);
         assertNotNull(h2);
         assertNotNull(h3);
@@ -165,7 +164,7 @@ public class BaseEntityTest {
     private V v1, v2;
 
     @Test
-    public void equalsTest() {
+    public void testEquals() {
         assertNotNull(s);
         assertNotNull(t);
         assertNotNull(u1);
@@ -214,7 +213,7 @@ public class BaseEntityTest {
     private Z z;
 
     @Test
-    public void toStringTest() {
+    public void testToString() {
         assertNotNull(w);
         assertNotNull(x);
         assertNotNull(y);
@@ -229,12 +228,12 @@ public class BaseEntityTest {
     // test BusinessException
 
     @Test(expected = BusinessException.class)
-    public void exceptionTest() {
+    public void testException() {
         throw new BusinessException("foo & bar");
     }
 
     @Test
-    public void exception2Test() {
+    public void testException2() {
         BusinessException e = new BusinessException("foo & bar");
         assertEquals("foo & bar", e.getMessage());
 

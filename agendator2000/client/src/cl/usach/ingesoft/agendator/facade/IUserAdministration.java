@@ -5,7 +5,7 @@ import cl.usach.ingesoft.agendator.entity.UserEntity;
 import java.util.List;
 
 public interface IUserAdministration {
-    void createUser(UserEntity newUser);
+    UserEntity createUser(String username, String password);
 
     List<UserEntity> findAllUsers();
 
@@ -15,7 +15,7 @@ public interface IUserAdministration {
 
     void deleteUser(int idUser);
 
-    void updateUser(UserEntity user);
+    UserEntity updateUser(int idUser, String username, String password);
 
     void deleteAllUsers();
 }

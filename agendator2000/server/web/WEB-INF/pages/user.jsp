@@ -201,7 +201,7 @@
 
                 <h2>Usuarios ingresados en el sistema</h2>
 
-                Hay <b><span id="counter">${fn:length(availableUsers)}</span></b> usuario(s).
+                Hay <b><span id="counter">${fn:length(availableUser)}</span></b> usuario(s).
 
                 <display:table name="availableUser" id="userTable" class="displayTable">
                     <display:column property="id" title="ID" class="id_col"/>

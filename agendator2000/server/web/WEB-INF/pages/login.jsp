@@ -72,12 +72,6 @@
     <div id="templatemo_menu">
         <ul>
             <li><a href="../main/index.html">Home</a></li>
-            <li><a href="../active/index.html">Activos</a></li>
-            <li><a href="../associate/index.html">Socios</a></li>
-            <li><a href="../contract/index.html">Contratos</a></li>
-            <li><a href="../finance/index.html">Finanzas</a></li>
-            <li><a href="../passive/index.html">Pasivos</a></li>
-            <li><a href="../staff/index.html">Personal</a></li>
             <li><a href="../user/index.html">Usuarios</a></li>
         </ul>
         <div class="cleaner"></div>

@@ -48,6 +48,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
                 <prop key="hibernate.c3p0.timeout">${database.c3p0.timeout}</prop>
                 <prop key="hibernate.c3p0.max_statement">${database.c3p0.max_statement}</prop>
                 <prop key="hibernate.c3p0.testConnectionOnCheckout">${database.c3p0.testConnectionOnCheckout}</prop>
+                <!--<prop key="transaction.flush_before_completion">true</prop>-->
             </props>
         </property>
     </bean>
@@ -94,7 +95,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <property name="loginFormUrl" value="/login.html"/>
     </bean>
 
-    <bean id="usernamePasswordAuthenticationFilter" class="cl.usach.ingesoft.agendator.util.business.application.ExUsernamePasswordAuthenticationFilter">
+    <bean id="usernamePasswordAuthenticationFilter" class="cl.usach.ingesoft.agendator.business.application.ExUsernamePasswordAuthenticationFilter">
         <property name="filterProcessesUrl" value="/loginProcess"/>
         <property name="authenticationSuccessHandler" ref="customAuthenticationSuccessHandler"/>
         <property name="authenticationFailureHandler" ref="customAuthenticationFailureHandler"/>
@@ -118,6 +119,6 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <!-- #################################### DB bootstrap ############################################# -->
 
     <!-- Listener para datos iniciales -->
-    <bean id="eventListenerBean" class="cl.usach.ingesoft.agendator.util.business.application.ApplicationListenerBean" />
+    <bean id="eventListenerBean" class="cl.usach.ingesoft.agendator.business.application.ApplicationListenerBean" />
 
 </beans>

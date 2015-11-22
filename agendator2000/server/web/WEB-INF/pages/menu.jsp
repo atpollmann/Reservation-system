@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
+<%@ page import="cl.usach.ingesoft.agendator.view.util.RequestHelper" %>
 <%!
     String menuMarker(boolean output){
         return output ? "class=\"current\"" : "";
@@ -11,8 +11,6 @@
 <div id="templatemo_menu">
     <ul>
         <li><a href="../main/index.html"<%= menuMarker(m==0) %>>Home</a></li>
-        <li><a href="../associate/index.html"<%= menuMarker(m==2 || m==8) %>>Socios</a></li>
-        <li><a href="../contract/index.html"<%= menuMarker(m==3) %>>Contratos</a></li>
         <li><a href="../user/index.html"<%= menuMarker(m==7) %>>Usuarios</a></li>
     </ul>
     <div class="cleaner"></div>

@@ -1,8 +1,8 @@
 package cl.usach.ingesoft.agendator.entity.base;
 
-import cl.usach.ingesoft.agendator.util.OmitInComparison;
-import cl.usach.ingesoft.agendator.util.OmitInHashcode;
-import cl.usach.ingesoft.agendator.util.OmitInToString;
+import cl.usach.ingesoft.agendator.view.util.OmitInComparison;
+import cl.usach.ingesoft.agendator.view.util.OmitInHashcode;
+import cl.usach.ingesoft.agendator.view.util.OmitInToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;

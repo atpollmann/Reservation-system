@@ -1,7 +1,7 @@
 package cl.usach.ingesoft.agendator.entity;
 
 import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
-import cl.usach.ingesoft.agendator.util.OmitInComparison;
+import cl.usach.ingesoft.agendator.view.util.OmitInComparison;
 
 import javax.persistence.*;
 
