@@ -1,7 +1,7 @@
 package cl.usach.ingesoft.agendator.business.validator;
 
-import cl.usach.ingesoft.agendator.common.BusinessException;
-import cl.usach.ingesoft.agendator.view.util.FormatHelper;
+import cl.usach.ingesoft.agendator.util.BusinessException;
+import cl.usach.ingesoft.agendator.util.FormatHelper;
 import org.apache.log4j.Logger;
 
 public class Validator {

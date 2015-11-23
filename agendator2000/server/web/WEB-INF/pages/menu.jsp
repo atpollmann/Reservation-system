@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="cl.usach.ingesoft.agendator.view.util.RequestHelper" %>
+<%@ page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
 <%!
     String menuMarker(boolean output){
         return output ? "class=\"current\"" : "";

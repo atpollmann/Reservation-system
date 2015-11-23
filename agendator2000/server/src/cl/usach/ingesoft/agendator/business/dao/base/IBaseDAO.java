@@ -3,7 +3,7 @@ package cl.usach.ingesoft.agendator.business.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
-public interface IBaseDAO<T, S extends Serializable> {
+public interface IBaseDao<T, S extends Serializable> {
     List<T> findAll();
 
     T findById(S pk);

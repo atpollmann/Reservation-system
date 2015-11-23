@@ -54,7 +54,7 @@
     </annotationProcessing>
   </component>
   <component name="CopyrightManager" default="" />
-  <component name="DataSourceManagerImpl" format="xml" hash="3977925823">
+  <component name="DataSourceManagerImpl" format="xml" hash="1551274485">
     <data-source source="LOCAL" name="MySQL - agendator@localhost" uuid="2f840ecd-6ffb-45e0-a6b0-d51e2e7d647a">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
@@ -233,7 +233,6 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/client/client.iml" filepath="$PROJECT_DIR$/client/client.iml" />
       <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
     </modules>
   </component>
@@ -258,8 +257,7 @@
   <component name="dataSourceStorageLocal">
     <data-source name="MySQL - agendator@localhost" uuid="2f840ecd-6ffb-45e0-a6b0-d51e2e7d647a">
       <user-name>root</user-name>
-      <schema-pattern>fcbarcelonaonline.*</schema-pattern>
-      <default-schemas>fcbarcelonaonline.*</default-schemas>
+      <schema-pattern>agendator.*</schema-pattern>
     </data-source>
   </component>
   <component name="libraryTable">

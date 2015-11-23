@@ -1,7 +1,7 @@
 package cl.usach.ingesoft.agendator.controller;
 
 import cl.usach.ingesoft.agendator.business.validator.Validator;
-import cl.usach.ingesoft.agendator.facade.IUserAdministration;
+import cl.usach.ingesoft.agendator.business.service.IUserAdministrationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    private IUserAdministration userAdministration;
+    private IUserAdministrationService userAdministration;
 
     @RequestMapping("/index.html")
     public ModelAndView index() {
@@ -113,7 +113,7 @@ public class UserController {
 
             logger.info("listing available usernames for '" + username + "'");
 
-            return (userAdministration.findByUsername(username) == null ? "yes" : "no");
+            return (userAdministration.findByEmail(username) == null ? "yes" : "no");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return "error, "+e.getMessage();

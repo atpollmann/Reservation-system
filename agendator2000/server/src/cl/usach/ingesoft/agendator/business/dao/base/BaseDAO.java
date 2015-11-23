@@ -9,10 +9,10 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import java.io.Serializable;
 import java.util.List;
 
-public class BaseDAO<T, S extends Serializable> extends HibernateDaoSupport implements IBaseDAO<T, S> {
+public class BaseDao<T, S extends Serializable> extends HibernateDaoSupport implements IBaseDao<T, S> {
     private final Class<T> persistentClass;
 
-    public BaseDAO(Class<T> persistentClass) {
+    public BaseDao(Class<T> persistentClass) {
         this.persistentClass = persistentClass;
     }
 

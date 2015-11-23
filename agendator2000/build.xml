@@ -3,7 +3,7 @@
     <property file="build.properties"/>
 
     <description>
-        build file for fcbarcelonaonline project - cc5604 task2
+        build file for agendator project - ingesoft
     </description>
 
     <!-- clean -->

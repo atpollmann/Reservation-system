@@ -1,6 +1,6 @@
 package cl.usach.ingesoft.agendator.business.validator;
 
-import cl.usach.ingesoft.agendator.common.BusinessException;
+import cl.usach.ingesoft.agendator.util.BusinessException;
 import org.junit.Test;
 
 public class ValidatorTest {

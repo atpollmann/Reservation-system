@@ -204,21 +204,12 @@
                 Hay <b><span id="counter">${fn:length(availableUser)}</span></b> usuario(s).
 
                 <display:table name="availableUser" id="userTable" class="displayTable">
-                    <display:column property="id" title="ID" class="id_col"/>
-                    <display:column property="username" title="Usuario"/>
-                    <display:column property="password" title="Password"/>
-                    <display:column title="Editar" class="edit_col">
-                        <a href="#"
-                           onclick="return editUser(${userTable.id},'${userTable.username}','${userTable.password}');">
-                            <img src="../../images/edit.png" class="edit-img" alt="Editar" title="Editar" width="16"
-                                 height="16"/>
-                        </a>
-                    </display:column>
-                    <display:column title="Borrar" class="edit_col">
-                        <a href="#" onclick="return deleteUser(this, ${userTable.id});">
-                            <img src="../../images/delete.png" class="delete-img" alt="Borrar" title="Borrar"/>
-                        </a>
-                    </display:column>
+                    <display:column property="id" title="Id" class="id_col"/>
+                    <display:column property="run" title="Run"/>
+                    <display:column property="firstName" title="FirstName"/>
+                    <display:column property="lastName" title="LastName"/>
+                    <display:column property="type" title="type"/>
+
                 </display:table>
 
                 <br/>
