@@ -44,6 +44,7 @@ public class SecurityUserContextLoader implements UserDetailsService {
             throw new BadCredentialsException("Acceso denegado");
         }
 
-        return new User(userEntity.getEmail(), userEntity.getHashedPassword(), true, true, true, true, new LinkedList<GrantedAuthority>());
+        return new User(userEntity.getEmail(), userEntity.getHashedPassword(), true, true, true, true,
+                new LinkedList<GrantedAuthority>());
     }
 }

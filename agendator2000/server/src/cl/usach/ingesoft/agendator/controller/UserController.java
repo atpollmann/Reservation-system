@@ -1,5 +1,6 @@
 package cl.usach.ingesoft.agendator.controller;
 
+import cl.usach.ingesoft.agendator.business.service.IUsersService;
 import cl.usach.ingesoft.agendator.business.validator.Validator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    //private IUserAdministrationService userAdministration;
+    private IUsersService usersService;
 
     @RequestMapping("/index.html")
     public ModelAndView index() {
