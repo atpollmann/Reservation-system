@@ -1,6 +1,9 @@
 package cl.usach.ingesoft.agendator.business.service;
 
 import cl.usach.ingesoft.agendator.entity.UserEntity;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface IUsersService {
     /**
@@ -10,6 +13,12 @@ public interface IUsersService {
      * @return User created, with its generated id already set.
      */
     UserEntity createUser(UserEntity user);
+
+    /**
+     *
+     * @return Finds the list of all registered users in the application.
+     */
+    List<UserEntity> findAllUsers();
 
     /**
      * Operation 2.
@@ -34,4 +43,11 @@ public interface IUsersService {
      * @return User taken from the database.
      */
     UserEntity findUser(int idUser);
+
+    /**
+     *
+     * @param email Email for the user to retrieve (case insensitive).
+     * @return User found for the given email, or null if none exists.
+     */
+    UserEntity findUserByEmail(String email);
 }

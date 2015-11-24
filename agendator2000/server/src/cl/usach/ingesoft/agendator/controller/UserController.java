@@ -2,6 +2,8 @@ package cl.usach.ingesoft.agendator.controller;
 
 import cl.usach.ingesoft.agendator.business.service.IUsersService;
 import cl.usach.ingesoft.agendator.business.validator.Validator;
+import cl.usach.ingesoft.agendator.entity.UserEntity;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -22,8 +25,7 @@ public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
 
-    @Autowired
-    private IUsersService usersService;
+    @Autowired private IUsersService usersService;
 
     @RequestMapping("/index.html")
     public ModelAndView index() {
@@ -45,75 +47,26 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/handleDelete", method = RequestMethod.POST, produces = "text/plain")
-    public String handleDelete(
-            @RequestParam("id") Integer id,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) {
-        try {
-            /*userAdministration.deleteUser(id);*/
-
-            logger.info("deleted user id:" + id);
-
-            return "ok";
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return "error, " + e.getMessage();
-        }
-    }
-
-    @RequestMapping(value = "/handlePost", method = RequestMethod.POST)
-    public View handlePost(
-            @RequestParam("id") Integer id,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("passwordConfirm") String passwordConfirm,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) {
-        try {
-            // necesarias? el BO ya las hace ...
-            Validator.shouldNotBeEmpty(username);
-            Validator.shouldBePassword(password);
-            Validator.shouldNotBeEmpty(passwordConfirm);
-            Validator.shouldBeEquals(password, passwordConfirm);
-            Validator.shouldBeUsername(username);
-            // ..............................
-
-            // create
-            if (id == null) {
-                //userAdministration.createUser(username, password);
-            }
-            // update
-            else {
-                //userAdministration.updateUser(id, username, password);
-            }
-
-            logger.info("redirecting from user/handlePost to user");
-
-            return new RedirectView("index.html");
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            return new RedirectView("error.html");
-        }
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/availableUsername", produces = "text/plain", method = RequestMethod.POST)
+    @RequestMapping(value = "/all_users", produces = "text/plain", method = RequestMethod.GET)
     public String availableUsername(
-            @RequestParam("username") String username,
             HttpServletRequest request,
             HttpServletResponse response
     ) {
         try {
-            Validator.shouldNotBeEmpty(username);
+            List<UserEntity> allUsers = usersService.findAllUsers();
 
-            username = username.trim().toLowerCase();
+            StringBuilder sb = new StringBuilder();
 
-            logger.info("listing available usernames for '" + username + "'");
+            for(UserEntity ue : allUsers) {
+                sb.append(ue.getLastName());
+                sb.append(',');
+                sb.append(ue.getFirstName());
+                sb.append(':');
+                sb.append(ue.getEmail());
+                sb.append('\n');
+            }
 
-            return "yes";//(userAdministration.findByEmail(username) == null ? "yes" : "no");
+            return sb.toString();
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return "error, "+e.getMessage();

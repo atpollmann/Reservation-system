@@ -1,8 +1,15 @@
 package cl.usach.ingesoft.agendator.business.framework;
 
+import cl.usach.ingesoft.agendator.business.dao.IAdministratorDao;
+import cl.usach.ingesoft.agendator.business.dao.IPatientDao;
+import cl.usach.ingesoft.agendator.business.dao.IProfessionalDao;
+import cl.usach.ingesoft.agendator.business.dao.ISpecialityDao;
 import cl.usach.ingesoft.agendator.entity.AdministratorEntity;
 import cl.usach.ingesoft.agendator.entity.PatientEntity;
+import cl.usach.ingesoft.agendator.entity.ProfessionalEntity;
+import cl.usach.ingesoft.agendator.entity.SpecialityEntity;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +21,16 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
 
     private static final Logger logger = Logger.getLogger(ApplicationListenerBean.class);
 
-    //@Autowired private IUserDAO userDAO;
+    @Autowired private IAdministratorDao administratorDao;
+    @Autowired private IPatientDao patientDao;
+    @Autowired private IProfessionalDao professionalDao;
+    @Autowired private ISpecialityDao specialityDao;
 
     private static final String APPLICATION_PROPERTIES_FILENAME = "/db.properties";
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void onApplicationEvent(ContextRefreshedEvent event) {
-
         try {
             // hack para pasar una propiedad desde el build.properties que indica si se debe llenar la BD
             InputStream inputStream = ApplicationListenerBean.class.getResourceAsStream(APPLICATION_PROPERTIES_FILENAME);
@@ -50,51 +59,95 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
 
     private void populateDatabase(){
         logger.info("populating database with initial data...");
-/*
-        if (userDAO.findAll().size() == 0) {
-            logger.info("inserting users ...");
-            userDAO.save(makeAdministrator(1, "foo1", "bar1", "f1", "l1", 1000, "root"));
-            userDAO.save(makeAdministrator(2, "foo2", "bar2", "f2", "l2", 2000, "general"));
-            userDAO.save(makeAdministrator(3, "foo3", "bar3", "f3", "l3", 2009, "general"));
 
-            userDAO.save(makeAdministrator(3, "foo3", "bar3", "f3", "l3", 2009, "general"));
-            userDAO.save(makeAdministrator(3, "foo3", "bar3", "f3", "l3", 2009, "general"));
-            userDAO.save(makeAdministrator(3, "foo3", "bar3", "f3", "l3", 2009, "general"));
-        } else {
-            logger.info("omitting insertion of users");
+        if (administratorDao.findAll().isEmpty()) {
+            administratorDao.save(makeAdministrator(1, 12000000, "juan", "perez", "j@p.cl", "abc123", "root"));
+            administratorDao.flush();
         }
-*/
+
+        if (patientDao.findAll().isEmpty()) {
+            patientDao.save(makePatient(2, 14000000, "rosendo", "morgado", "r@m.cl", "1234"));
+            patientDao.flush();
+        }
+
+        if (specialityDao.findAll().isEmpty()) {
+            specialityDao.save(makeSpeciality(1, "sicologo"));
+            specialityDao.flush();
+        }
+
+        if (professionalDao.findAll().isEmpty()) {
+            professionalDao.save(makeProfessional(3, 16000000, "belfor", "cruz", "b@c.cl", "a4", 1));
+            professionalDao.flush();
+        }
+
         logger.info("database updated");
     }
 
-    private AdministratorEntity makeAdministrator(int id, String email, String password, String firstName, String lastName, int run, String type) {
-        AdministratorEntity a = new AdministratorEntity();
-
-        // UserEntity attributes
-        a.setId(id);
-        a.setFirstName(firstName);
-        a.setLastName(lastName);
-        a.setRun(run);
-        a.setEmail(email);
-        a.setHashedPassword(password);
-
-        // Administrator attributes
-        a.setType("root");
-        return a;
+    private AdministratorEntity makeAdministrator(
+            int id,
+            int run,
+            String firstName,
+            String lastName,
+            String email,
+            String hashedPassword,
+            String type
+    ) {
+        AdministratorEntity ae = new AdministratorEntity();
+        ae.setId(id);
+        ae.setRun(run);
+        ae.setFirstName(firstName);
+        ae.setLastName(lastName);
+        ae.setEmail(email);
+        ae.setHashedPassword(hashedPassword);
+        ae.setType(type);
+        return ae;
     }
 
-    private PatientEntity makePatient(int id, String email, String password, String firstName, String lastName, int run, String type) {
-        PatientEntity a = new PatientEntity();
-
-        // UserEntity attributes
-        a.setId(id);
-        a.setFirstName(firstName);
-        a.setLastName(lastName);
-        a.setRun(run);
-        a.setEmail(email);
-        a.setHashedPassword(password);
-
-        return a;
+    private PatientEntity makePatient(
+            int id,
+            int run,
+            String firstName,
+            String lastName,
+            String email,
+            String hashedPassword
+    ) {
+        PatientEntity pe = new PatientEntity();
+        pe.setId(id);
+        pe.setRun(run);
+        pe.setFirstName(firstName);
+        pe.setLastName(lastName);
+        pe.setEmail(email);
+        pe.setHashedPassword(hashedPassword);
+        return pe;
     }
 
+    private ProfessionalEntity makeProfessional(
+            int id,
+            int run,
+            String firstName,
+            String lastName,
+            String email,
+            String hashedPassword,
+            int idSpeciality
+    ) {
+        ProfessionalEntity pe = new ProfessionalEntity();
+        pe.setId(id);
+        pe.setRun(run);
+        pe.setFirstName(firstName);
+        pe.setLastName(lastName);
+        pe.setEmail(email);
+        pe.setHashedPassword(hashedPassword);
+        pe.setSpeciality(specialityDao.findById(idSpeciality));
+        return pe;
+    }
+
+    private SpecialityEntity makeSpeciality(
+            int id,
+            String name
+    ) {
+        SpecialityEntity se = new SpecialityEntity();
+        se.setId(id);
+        se.setName(name);
+        return se;
+    }
 }

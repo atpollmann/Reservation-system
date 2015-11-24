@@ -1,113 +1,67 @@
 package cl.usach.ingesoft.agendator.business.service.impl;
 
-import cl.usach.ingesoft.agendator.business.service.IAdministrationService;
-import cl.usach.ingesoft.agendator.entity.CareSessionEntity;
-import cl.usach.ingesoft.agendator.entity.OngEntity;
+import cl.usach.ingesoft.agendator.business.dao.IAdministratorDao;
+import cl.usach.ingesoft.agendator.business.dao.IPatientDao;
+import cl.usach.ingesoft.agendator.business.dao.IProfessionalDao;
+import cl.usach.ingesoft.agendator.business.dao.IUserDao;
+import cl.usach.ingesoft.agendator.business.service.IUsersService;
+import cl.usach.ingesoft.agendator.entity.UserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.util.List;
 
 @Service
-public class UsersService implements IAdministrationService {
-    @Override
-    public CareSessionEntity createCareSession(CareSessionEntity careSession) {
-        throw new RuntimeException("Not yet implemented.");
-    }
+public class UsersService implements IUsersService {
 
-    @Override
-    public boolean cancelCareSession(CareSessionEntity careSession) {
-        throw new RuntimeException("Not yet implemented.");
-    }
+    @Autowired private IUserDao userDao;
 
-    @Override
-    public CareSessionEntity updateCareSession(CareSessionEntity careSession) {
-        throw new RuntimeException("Not yet implemented.");
-    }
+    @Autowired private IAdministratorDao administratorDao;
+    @Autowired private IProfessionalDao professionalDao;
+    @Autowired private IPatientDao patientDao;
 
-    @Override
-    public OngEntity findCurrentOng(Date currentTime) {
-        throw new RuntimeException("Not yet implemented.");
-    }
-
-    @Override
-    public CareSessionEntity findCurrentCareSession(OngEntity ong, Date currentTime) {
-        throw new RuntimeException("Not yet implemented.");
-    }
-
-
-/*
-    @Override
     @Transactional
+    @Override
     public UserEntity createUser(UserEntity user) {
-        Validator.shouldNotBeEmpty(user.getEmail());
-        Validator.shouldNotBeEmpty(user.getHashedPassword());
-        Validator.shouldNotBeEmpty(user.getFirstName());
-        Validator.shouldNotBeEmpty(user.getLastName());
-
-        UserEntity user = userDAO.findByEmail(email);
-
-        Validator.shouldBeNull(user);
-
-        UserEntity newUser = new UserEntity();
-        newUser.setEmail(email);
-        newUser.setHashedPassword(password);
-
-        userDAO.save(newUser);
-        userDAO.flush();
-
-        return newUser;
+        // guess new id for creating a new user!
+        throw new RuntimeException("Not yet implemented.");
     }
 
-    @Override
     @Transactional
+    @Override
     public List<UserEntity> findAllUsers() {
-        return userDAO.findAll();
+        return userDao.findAll();
     }
 
-    @Override
     @Transactional
-    public UserEntity findById(int id) {
-        return userDAO.findById(id);
+    @Override
+    public boolean deleteUser(int idUser) {
+        UserEntity ue = userDao.findById(idUser);
+        if (ue == null) {
+            return false;
+        }
+        userDao.delete(ue);
+        userDao.flush();
+        return (userDao.findById(idUser) == null);
     }
 
-    @Override
     @Transactional
-    public UserEntity findByEmail(String email) {
-        Validator.shouldNotBeEmpty(email);
-        return userDAO.findByEmail(email);
-    }
-
     @Override
-    @Transactional
-    public void deleteUser(int id) {
-        UserEntity user = userDAO.findById(id);
-
-        Validator.shouldBeFound(user);
-
-        userDAO.delete(user);
-        userDAO.flush();
-    }
-
-    @Override
-    @Transactional
-    public UserEntity updateUser(int idUser, String email, String password) {
-        UserEntity user = userDAO.findById(idUser);
-
-        Validator.shouldBeFound(user);
-
-        user.setEmail(email);
-        user.setHashedPassword(password);
-
-        userDAO.update(user);
-        userDAO.flush();
-
+    public UserEntity updateUser(UserEntity user) {
+        userDao.update(user);
         return user;
     }
 
-    @Override
     @Transactional
-    public void deleteAllUsers() {
-        userDAO.deleteAll();
-        userDAO.flush();
-    }*/
+    @Override
+    public UserEntity findUser(int idUser) {
+        return userDao.findById(idUser);
+    }
+
+    @Transactional
+    @Override
+    public UserEntity findUserByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
 }

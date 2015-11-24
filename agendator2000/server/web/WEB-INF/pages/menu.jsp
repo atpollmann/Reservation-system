@@ -11,7 +11,7 @@
 <div id="templatemo_menu">
     <ul>
         <li><a href="../main/index.html"<%= menuMarker(m==0) %>>Home</a></li>
-        <li><a href="../user/index.html"<%= menuMarker(m==7) %>>Usuarios</a></li>
+        <li><a href="../user/all_users"<%= menuMarker(m==7) %>>Usuarios</a></li>
     </ul>
     <div class="cleaner"></div>
 </div>
