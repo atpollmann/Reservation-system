@@ -2,8 +2,6 @@ package cl.usach.ingesoft.agendator.business.framework;
 
 import cl.usach.ingesoft.agendator.captcha.CaptchaSingleton;
 import cl.usach.ingesoft.agendator.entity.UserEntity;
-import cl.usach.ingesoft.agendator.business.service.IUserAdministrationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,11 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 
+//import cl.usach.ingesoft.agendator.business.service.IUserAdministrationService;
+
 @Service(value = "securityUserDetailsService")
 public class SecurityUserContextLoader implements UserDetailsService {
 
-    @Autowired
-    private IUserAdministrationService userAdministration;
+    //@Autowired private IAdministrationService userAdministration;
 
     @Override
     @Transactional
@@ -33,7 +32,14 @@ public class SecurityUserContextLoader implements UserDetailsService {
         }
 
         // user credential mechanism
-        UserEntity userEntity = userAdministration.findByEmail(email);
+        UserEntity userEntity = new UserEntity();//userAdministration.findByEmail(email);
+        userEntity.setId(100);
+        userEntity.setEmail("foo");
+        userEntity.setHashedPassword("bar");
+        userEntity.setRun(177);
+        userEntity.setFirstName("rene");
+        userEntity.setLastName("tapia");
+
         if (userEntity == null) {
             throw new BadCredentialsException("Acceso denegado");
         }

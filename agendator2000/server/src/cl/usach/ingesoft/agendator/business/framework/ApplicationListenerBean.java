@@ -1,10 +1,8 @@
 package cl.usach.ingesoft.agendator.business.framework;
 
-import cl.usach.ingesoft.agendator.business.dao.IUserDAO;
 import cl.usach.ingesoft.agendator.entity.AdministratorEntity;
 import cl.usach.ingesoft.agendator.entity.PatientEntity;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +14,7 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
 
     private static final Logger logger = Logger.getLogger(ApplicationListenerBean.class);
 
-    @Autowired private IUserDAO userDAO;
+    //@Autowired private IUserDAO userDAO;
 
     private static final String APPLICATION_PROPERTIES_FILENAME = "/db.properties";
 
@@ -52,7 +50,7 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
 
     private void populateDatabase(){
         logger.info("populating database with initial data...");
-
+/*
         if (userDAO.findAll().size() == 0) {
             logger.info("inserting users ...");
             userDAO.save(makeAdministrator(1, "foo1", "bar1", "f1", "l1", 1000, "root"));
@@ -65,7 +63,7 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
         } else {
             logger.info("omitting insertion of users");
         }
-
+*/
         logger.info("database updated");
     }
 

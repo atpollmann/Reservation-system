@@ -1,7 +1,6 @@
 package cl.usach.ingesoft.agendator.controller;
 
 import cl.usach.ingesoft.agendator.business.validator.Validator;
-import cl.usach.ingesoft.agendator.business.service.IUserAdministrationService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ public class UserController {
     private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
-    private IUserAdministrationService userAdministration;
+    //private IUserAdministrationService userAdministration;
 
     @RequestMapping("/index.html")
     public ModelAndView index() {
@@ -31,7 +30,7 @@ public class UserController {
         logger.info("handling default method");
 
         return new ModelAndView("frame")
-                .addObject("availableUser", userAdministration.findAllUsers())
+                .addObject("availableUser", null/*userAdministration.findAllUsers()*/)
                 .addObject("module", 7);
     }
 
@@ -52,7 +51,7 @@ public class UserController {
             HttpServletResponse response
     ) {
         try {
-            userAdministration.deleteUser(id);
+            /*userAdministration.deleteUser(id);*/
 
             logger.info("deleted user id:" + id);
 
@@ -83,11 +82,11 @@ public class UserController {
 
             // create
             if (id == null) {
-                userAdministration.createUser(username, password);
+                //userAdministration.createUser(username, password);
             }
             // update
             else {
-                userAdministration.updateUser(id, username, password);
+                //userAdministration.updateUser(id, username, password);
             }
 
             logger.info("redirecting from user/handlePost to user");
@@ -113,7 +112,7 @@ public class UserController {
 
             logger.info("listing available usernames for '" + username + "'");
 
-            return (userAdministration.findByEmail(username) == null ? "yes" : "no");
+            return "yes";//(userAdministration.findByEmail(username) == null ? "yes" : "no");
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return "error, "+e.getMessage();

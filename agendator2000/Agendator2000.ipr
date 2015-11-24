@@ -6,15 +6,15 @@
       <root id="root">
         <element id="directory" name="WEB-INF">
           <element id="directory" name="classes">
-            <element id="module-output" name="server" />
-            <element id="jpa-descriptors" facet="server/jpa/JPA" />
-            <element id="module-output" name="client" />
+            <element id="module-output" name="application" />
+            <element id="jpa-descriptors" facet="application/jpa/JPA" />
           </element>
           <element id="directory" name="lib">
             <element id="library" level="project" name="project-libs" />
           </element>
         </element>
-        <element id="javaee-facet-resources" facet="server/web/Web" />
+        <element id="javaee-facet-resources" facet="application/web/Web" />
+        <element id="javaee-facet-resources" facet="application/javaeeApplication/javaEEApplication" />
       </root>
     </artifact>
     <artifact type="exploded-ear" name="agendator:ear exploded">
@@ -233,7 +233,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/application.iml" filepath="$PROJECT_DIR$/server/application.iml" />
     </modules>
   </component>
   <component name="ProjectResources">

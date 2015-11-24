@@ -32,7 +32,8 @@
         <fileset id="fileset1" name="Xml Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/applicationContext.xml</file>
         </fileset>
-        <fileset id="fileset2" name="Xml Application Context1" removed="false">
+        <fileset id="web mvc-dispatcher servlet context" name="MVC mvc-dispatcher servlet context" removed="true">
+          <dependency>web application context</dependency>
           <file>file://$MODULE_DIR$/web/WEB-INF/mvc-dispatcher-servlet.xml</file>
         </fileset>
       </configuration>

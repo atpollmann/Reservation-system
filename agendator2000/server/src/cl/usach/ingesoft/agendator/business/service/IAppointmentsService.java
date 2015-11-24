@@ -1,4 +1,5 @@
 package cl.usach.ingesoft.agendator.business.service;
 
-public interface IAdministrationService {
+
+public interface IAppointmentsService {
 }
