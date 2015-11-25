@@ -1,11 +1,13 @@
 package cl.usach.ingesoft.agendator.business.service.impl;
 
-import cl.usach.ingesoft.agendator.business.dao.IAdministratorDao;
-import cl.usach.ingesoft.agendator.business.dao.IPatientDao;
-import cl.usach.ingesoft.agendator.business.dao.IProfessionalDao;
-import cl.usach.ingesoft.agendator.business.dao.IUserDao;
+import cl.usach.ingesoft.agendator.business.dao.*;
+import cl.usach.ingesoft.agendator.business.dao.base.ISequenceDao;
 import cl.usach.ingesoft.agendator.business.service.IUsersService;
+import cl.usach.ingesoft.agendator.entity.AdministratorEntity;
+import cl.usach.ingesoft.agendator.entity.PatientEntity;
+import cl.usach.ingesoft.agendator.entity.ProfessionalEntity;
 import cl.usach.ingesoft.agendator.entity.UserEntity;
+import cl.usach.ingesoft.agendator.entity.base.SequenceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,15 +19,42 @@ public class UsersService implements IUsersService {
 
     @Autowired private IUserDao userDao;
 
+    @Autowired private ISequenceDao sequenceDao;
+
     @Autowired private IAdministratorDao administratorDao;
     @Autowired private IProfessionalDao professionalDao;
     @Autowired private IPatientDao patientDao;
 
     @Transactional
     @Override
-    public UserEntity createUser(UserEntity user) {
-        // guess new id for creating a new user!
-        throw new RuntimeException("Not yet implemented.");
+    public <T extends UserEntity> T createUser(T user) {
+        // hack to circumvent identities not being available for table-per-class implementation on BD
+        // Generate id and save for Administrator
+        if (AdministratorEntity.class.isAssignableFrom(user.getClass())) {
+            SequenceEntity se = sequenceDao.generate();
+            user.setId(se.getId());
+            administratorDao.save((AdministratorEntity)user);
+            administratorDao.flush();
+            return user;
+        }
+        // Generate id and save for Professional
+        else if (ProfessionalEntity.class.isAssignableFrom(user.getClass())) {
+            SequenceEntity se = sequenceDao.generate();
+            user.setId(se.getId());
+            professionalDao.save((ProfessionalEntity)user);
+            professionalDao.flush();
+        }
+        // Generate id and save for Patient
+        else if (PatientEntity.class.isAssignableFrom(user.getClass())) {
+            SequenceEntity se = sequenceDao.generate();
+            user.setId(se.getId());
+            patientDao.save((PatientEntity)user);
+            patientDao.flush();
+        } else {
+            // guess new id for creating a new user!
+            throw new RuntimeException("Unsupported subclass for UserEntity:" + user.getClass().getName());
+        }
+        return user;
     }
 
     @Transactional
@@ -50,6 +79,7 @@ public class UsersService implements IUsersService {
     @Override
     public UserEntity updateUser(UserEntity user) {
         userDao.update(user);
+        userDao.flush();
         return user;
     }
 

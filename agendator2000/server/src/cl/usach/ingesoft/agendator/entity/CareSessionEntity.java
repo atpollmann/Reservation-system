@@ -16,6 +16,7 @@ public class CareSessionEntity extends BaseEntity {
     private String location;
     private Date startDate;
     private Date endDate;
+    private Boolean valid;
 
     @OmitInComparison
     private List<ScheduleEntity> schedules;
@@ -36,15 +37,20 @@ public class CareSessionEntity extends BaseEntity {
     public String getLocation() {return location;}
     public void setLocation(String location) {this.location = location;}
 
-    @Column(name = "startDate", nullable = false, unique = false, insertable = true, updatable = true)
+    @Column(name = "startDate", nullable = false, insertable = true, updatable = true)
     @Basic
     public Date getStartDate() {return startDate;}
     public void setStartDate(Date startDate) {this.startDate = startDate;}
 
-    @Column(name = "endDate", nullable = false, unique = false, insertable = true, updatable = true)
+    @Column(name = "endDate", nullable = false, insertable = true, updatable = true)
     @Basic
     public Date getEndDate() {return endDate;}
     public void setEndDate(Date endDate) {this.endDate = endDate;}
+
+    @Column(name = "valid", nullable = false, insertable = true, updatable = true)
+    @Basic
+    public Boolean getValid() {return valid;}
+    public void setValid(Boolean valid) {this.valid = valid;}
 
     @OneToMany(mappedBy = "careSession", fetch = FetchType.LAZY)
     public List<ScheduleEntity> getSchedules() {return schedules;}

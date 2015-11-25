@@ -4,6 +4,7 @@ import cl.usach.ingesoft.agendator.business.dao.IAdministratorDao;
 import cl.usach.ingesoft.agendator.business.dao.IPatientDao;
 import cl.usach.ingesoft.agendator.business.dao.IProfessionalDao;
 import cl.usach.ingesoft.agendator.business.dao.ISpecialityDao;
+import cl.usach.ingesoft.agendator.business.service.IUsersService;
 import cl.usach.ingesoft.agendator.entity.AdministratorEntity;
 import cl.usach.ingesoft.agendator.entity.PatientEntity;
 import cl.usach.ingesoft.agendator.entity.ProfessionalEntity;
@@ -21,9 +22,7 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
 
     private static final Logger logger = Logger.getLogger(ApplicationListenerBean.class);
 
-    @Autowired private IAdministratorDao administratorDao;
-    @Autowired private IPatientDao patientDao;
-    @Autowired private IProfessionalDao professionalDao;
+    @Autowired private IUsersService usersService;
     @Autowired private ISpecialityDao specialityDao;
 
     private static final String APPLICATION_PROPERTIES_FILENAME = "/db.properties";
@@ -60,31 +59,20 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
     private void populateDatabase(){
         logger.info("populating database with initial data...");
 
-        if (administratorDao.findAll().isEmpty()) {
-            administratorDao.save(makeAdministrator(1, 12000000, "juan", "perez", "j@p.cl", "abc123", "root"));
-            administratorDao.flush();
-        }
-
-        if (patientDao.findAll().isEmpty()) {
-            patientDao.save(makePatient(2, 14000000, "rosendo", "morgado", "r@m.cl", "1234"));
-            patientDao.flush();
-        }
-
-        if (specialityDao.findAll().isEmpty()) {
-            specialityDao.save(makeSpeciality(1, "sicologo"));
-            specialityDao.flush();
-        }
-
-        if (professionalDao.findAll().isEmpty()) {
-            professionalDao.save(makeProfessional(3, 16000000, "belfor", "cruz", "b@c.cl", "a4", 1));
-            professionalDao.flush();
+        if (usersService.findAllUsers().size() == 0) {
+            usersService.createUser(makeAdministrator(12000000, "juan", "perez", "j@p.cl", "abc123", "root"));
+            usersService.createUser(makePatient(14000000, "rosendo", "morgado", "r@m.cl", "1234"));
+            if (specialityDao.findAll().isEmpty()) {
+                specialityDao.save(makeSpeciality(1, "sicologo"));
+                specialityDao.flush();
+            }
+            usersService.createUser(makeProfessional(16000000, "belfor", "cruz", "b@c.cl", "a4", 1));
         }
 
         logger.info("database updated");
     }
 
     private AdministratorEntity makeAdministrator(
-            int id,
             int run,
             String firstName,
             String lastName,
@@ -93,7 +81,6 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
             String type
     ) {
         AdministratorEntity ae = new AdministratorEntity();
-        ae.setId(id);
         ae.setRun(run);
         ae.setFirstName(firstName);
         ae.setLastName(lastName);
@@ -104,7 +91,6 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
     }
 
     private PatientEntity makePatient(
-            int id,
             int run,
             String firstName,
             String lastName,
@@ -112,7 +98,6 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
             String hashedPassword
     ) {
         PatientEntity pe = new PatientEntity();
-        pe.setId(id);
         pe.setRun(run);
         pe.setFirstName(firstName);
         pe.setLastName(lastName);
@@ -122,7 +107,6 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
     }
 
     private ProfessionalEntity makeProfessional(
-            int id,
             int run,
             String firstName,
             String lastName,
@@ -131,7 +115,6 @@ public class ApplicationListenerBean implements ApplicationListener<ContextRefre
             int idSpeciality
     ) {
         ProfessionalEntity pe = new ProfessionalEntity();
-        pe.setId(id);
         pe.setRun(run);
         pe.setFirstName(firstName);
         pe.setLastName(lastName);

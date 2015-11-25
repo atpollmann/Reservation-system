@@ -34,10 +34,10 @@ public interface IAdministrationService {
 
     /**
      *
-     * @param currentTime Date and time for which the Ong is to be found.
-     * @return Ong for the supplied time. If no Ong is found, null is returned instead.
+     * @param ongId Id for the Ong to retrieve.
+     * @return Ong for the id provided, or null if none was found.
      */
-    OngEntity findCurrentOng(Date currentTime);
+    OngEntity findCurrentOng(int ongId);
 
     /**
      *

@@ -10,9 +10,10 @@ public interface IUsersService {
      * Operation 1.
      *
      * @param user User to be created (must not come from the database).
+     * @param <T> Class, derived from UserEntity.
      * @return User created, with its generated id already set.
      */
-    UserEntity createUser(UserEntity user);
+    <T extends UserEntity> T createUser(T user);
 
     /**
      *
