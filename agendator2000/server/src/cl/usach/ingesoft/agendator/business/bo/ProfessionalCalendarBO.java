@@ -14,6 +14,11 @@ public class ProfessionalCalendarBO {
         }
         public K schedule;
         public S appointment;
+
+        @Override
+        public String toString() {
+            return "Pair=[" + String.valueOf(schedule) + "/" + String.valueOf(appointment) + "]";
+        }
     }
 
     private CareSessionEntity careSession;
@@ -48,5 +53,13 @@ public class ProfessionalCalendarBO {
         return takenAppointments;
     }
 
-
+    @Override
+    public String toString() {
+        return "ProfessionalCalendarBO=[\n" +
+            "\t" + String.valueOf(careSession) + "\n" +
+            "\t" + String.valueOf(freeSchedules) + "\n" +
+            "\t" + String.valueOf(careSession) + "\n" +
+            "\t" + String.valueOf(takenAppointments) + "\n" +
+        "]";
+    }
 }

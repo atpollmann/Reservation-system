@@ -1,11 +1,11 @@
 package cl.usach.ingesoft.agendator.business.service.impl;
 
+import static cl.usach.ingesoft.agendator.business.bo.ProfessionalCalendarBO.Pair;
+
 import cl.usach.ingesoft.agendator.business.bo.ProfessionalCalendarBO;
-import cl.usach.ingesoft.agendator.business.dao.impl.AppointmentDao;
-import cl.usach.ingesoft.agendator.business.dao.impl.ProfessionalDao;
-import cl.usach.ingesoft.agendator.business.dao.impl.ScheduleDao;
-import cl.usach.ingesoft.agendator.business.dao.impl.SpecialityDao;
+import cl.usach.ingesoft.agendator.business.dao.impl.*;
 import cl.usach.ingesoft.agendator.business.service.IProfessionalsService;
+import cl.usach.ingesoft.agendator.business.validator.Validator;
 import cl.usach.ingesoft.agendator.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,30 +23,34 @@ public class ProfessionalsService implements IProfessionalsService {
     @Autowired private SpecialityDao specialityDao;
     @Autowired private ScheduleDao scheduleDao;
     @Autowired private AppointmentDao appointmentDao;
+    @Autowired private CareSessionDao careSessionDao;
 
     @Transactional
     @Override
-    public List<ProfessionalEntity> findProfessionalsByCareSession(CareSessionEntity careSession) {
-        throw new RuntimeException("Not yet implemented.");
+    public List<ProfessionalEntity> findProfessionalsByCareSession(int idCareSession) {
+        return professionalDao.findByCareSession(idCareSession);
     }
 
     @Transactional
     @Override
-    public ProfessionalCalendarBO getProfessionalCalendar(ProfessionalEntity professional,
-            CareSessionEntity careSession) {
-        List<ScheduleEntity> frees = new ArrayList<ScheduleEntity>();
-        List<ProfessionalCalendarBO.Pair<ScheduleEntity, AppointmentEntity>> taken
-                = new ArrayList<ProfessionalCalendarBO.Pair<ScheduleEntity, AppointmentEntity>>();
+    public ProfessionalCalendarBO getProfessionalCalendar(int idProfessional, int idCareSession) {
+        ProfessionalEntity professional = professionalDao.findById(idProfessional);
+        CareSessionEntity careSession = careSessionDao.findById(idCareSession);
 
-        List<ScheduleEntity> allSchedules
-                = scheduleDao.findByProfessionalByCareSession(professional.getId(), careSession.getId());
-        List<AppointmentEntity> allAppointments
-                = appointmentDao.findByProfessionalByCareSession(professional.getId(), careSession.getId());
+        Validator.shouldBeFound(professional);
+        Validator.shouldBeFound(careSession);
+
+        List<ScheduleEntity> frees = new ArrayList();
+        List<Pair<ScheduleEntity, AppointmentEntity>> taken = new ArrayList();
+
+        List<ScheduleEntity> allSchedules = scheduleDao.findByProfessionalByCareSession(idProfessional, idCareSession);
+        List<AppointmentEntity> allAppointments = appointmentDao.findByProfessionalByCareSession(idProfessional,
+                idCareSession);
 
         // allAppointments should be a subset of allSchedules
 
         // put all the schedules into a hashmap (by id)
-        HashMap<Integer, ScheduleEntity> sch = new HashMap<Integer, ScheduleEntity>();
+        HashMap<Integer, ScheduleEntity> sch = new HashMap();
         for (ScheduleEntity se : allSchedules) {
             sch.put(se.getId(), se);
         }
@@ -54,8 +58,7 @@ public class ProfessionalsService implements IProfessionalsService {
         // get the schedules related to appointments and put them in taken
         for (AppointmentEntity ae : allAppointments) {
             ScheduleEntity se = sch.remove(ae.getSchedule().getId());
-            ProfessionalCalendarBO.Pair<ScheduleEntity, AppointmentEntity> pair
-                    = new ProfessionalCalendarBO.Pair<ScheduleEntity, AppointmentEntity>(se, ae);
+            Pair<ScheduleEntity, AppointmentEntity> pair = new Pair(se, ae);
             taken.add(pair);
         }
 
@@ -69,8 +72,14 @@ public class ProfessionalsService implements IProfessionalsService {
 
     @Transactional
     @Override
-    public ProfessionalCalendarBO setScheduleForProfessional(CareSessionEntity careSession,
-            ProfessionalEntity professional, List<ScheduleEntity> schedules) {
+    public ProfessionalCalendarBO setScheduleForProfessional(int idProfessional, int idCareSession,
+            List<ScheduleEntity> schedules) {
+        CareSessionEntity careSession = careSessionDao.findById(idCareSession);
+        ProfessionalEntity professional = professionalDao.findById(idProfessional);
+
+        Validator.shouldBeFound(careSession);
+        Validator.shouldBeFound(professional);
+
         for(ScheduleEntity se : schedules) {
             se.setId(null);
             se.setProfessional(professional);
@@ -78,7 +87,7 @@ public class ProfessionalsService implements IProfessionalsService {
         }
         scheduleDao.saveAll(schedules);
         scheduleDao.flush();
-        return getProfessionalCalendar(professional, careSession);
+        return getProfessionalCalendar(idProfessional, idCareSession);
     }
 
     @Transactional
