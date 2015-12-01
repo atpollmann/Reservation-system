@@ -15,10 +15,10 @@ public interface IAppointmentsService {
     /**
      * Operation 9.
      *
-     * @param appointment Appointment to be canceled.
+     * @param idAppointment Id of the appointment to be canceled.
      * @return Whether the appoint could be canceled or not (true means canceled, otherwise false).
      */
-    boolean cancelAppointment(AppointmentEntity appointment);
+    boolean cancelAppointment(int idAppointment);
 
     /**
      * Operation 10.

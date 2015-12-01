@@ -4,6 +4,7 @@ import cl.usach.ingesoft.agendator.business.bo.ProfessionalCalendarBO;
 import cl.usach.ingesoft.agendator.entity.CareSessionEntity;
 import cl.usach.ingesoft.agendator.entity.ProfessionalEntity;
 import cl.usach.ingesoft.agendator.entity.ScheduleEntity;
+import cl.usach.ingesoft.agendator.entity.SpecialityEntity;
 
 import java.util.List;
 
@@ -36,4 +37,17 @@ public interface IProfessionalsService {
      */
     ProfessionalCalendarBO setScheduleForProfessional(CareSessionEntity careSession, ProfessionalEntity professional,
             List<ScheduleEntity> schedules);
+
+    /**
+     * Gets the list of specialities for this application.
+     * @return List of specialities to be associated to any Professional.
+     */
+    List<SpecialityEntity> findSpecialities();
+
+    /**
+     * Gets a speciality by its known id.
+     * @param id Id of the speciality to find.
+     * @return Non-null speciality if exists, or null if none was found.
+     */
+    SpecialityEntity findSpecialityById(int id);
 }

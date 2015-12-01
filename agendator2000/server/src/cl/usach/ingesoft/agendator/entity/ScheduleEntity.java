@@ -2,6 +2,7 @@ package cl.usach.ingesoft.agendator.entity;
 
 import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
 import cl.usach.ingesoft.agendator.util.OmitInComparison;
+import cl.usach.ingesoft.agendator.util.OmitInToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,21 +18,18 @@ public class ScheduleEntity extends BaseEntity {
     private Date startDate;
     private Date endDate;
 
-    @OmitInComparison
-    private List<AppointmentEntity> appointments;
-
     @Column(name = "id", nullable = false, insertable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "professional", referencedColumnName = "id")
     public ProfessionalEntity getProfessional() {return professional;}
     public void setProfessional(ProfessionalEntity professional) {this.professional = professional;}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "careSession", referencedColumnName = "id")
     public CareSessionEntity getCareSession() {return careSession;}
     public void setCareSession(CareSessionEntity careSession) {this.careSession = careSession;}
@@ -47,8 +45,4 @@ public class ScheduleEntity extends BaseEntity {
     @Basic
     public Date getEndDate() {return endDate;}
     public void setEndDate(Date endDate) {this.endDate = endDate;}
-
-    @OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
-    public List<AppointmentEntity> getAppointments() {return appointments;}
-    public void setAppointments(List<AppointmentEntity> appointments) {this.appointments = appointments;}
 }

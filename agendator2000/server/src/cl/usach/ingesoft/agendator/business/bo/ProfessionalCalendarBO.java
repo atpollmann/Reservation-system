@@ -7,8 +7,13 @@ import java.util.List;
 public class ProfessionalCalendarBO {
 
     public static class Pair<K, S> {
-        public K first;
-        public S second;
+        public Pair() {}
+        public Pair(K schedule, S appointment) {
+            this.schedule = schedule;
+            this.appointment = appointment;
+        }
+        public K schedule;
+        public S appointment;
     }
 
     private CareSessionEntity careSession;
@@ -20,9 +25,10 @@ public class ProfessionalCalendarBO {
     }
 
     public ProfessionalCalendarBO(CareSessionEntity careSession, ProfessionalEntity professional,
-            List<Pair<ScheduleEntity, AppointmentEntity> > takenAppointments) {
+            List<ScheduleEntity> freeSchedules, List<Pair<ScheduleEntity, AppointmentEntity> > takenAppointments) {
         this.careSession = careSession;
         this.professional = professional;
+        this.freeSchedules = freeSchedules;
         this.takenAppointments = takenAppointments;
     }
 

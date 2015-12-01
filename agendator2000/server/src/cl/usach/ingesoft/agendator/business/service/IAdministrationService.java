@@ -19,10 +19,10 @@ public interface IAdministrationService {
      *
      * Cancels a CareSession (this does not deletes it).
      *
-     * @param careSession CareSession to be canceled.
+     * @param idCareSession Id for the CareSession to be canceled.
      * @return whether the CareSession could be canceled or not (true means canceled, otherwise false).
      */
-    boolean cancelCareSession(CareSessionEntity careSession);
+    boolean cancelCareSession(int idCareSession);
 
     /**
      * Operation 7.
@@ -38,6 +38,7 @@ public interface IAdministrationService {
      * @return Ong for the id provided, or null if none was found.
      */
     OngEntity findCurrentOng(int ongId);
+    OngEntity findCurrentOng();
 
     /**
      *
@@ -46,4 +47,11 @@ public interface IAdministrationService {
      * @return CareSession for the supplied parameters (or null if none was found).
      */
     CareSessionEntity findCurrentCareSession(OngEntity ong, Date currentTime);
+
+    /**
+     *
+     * @param idCareSession If for the CareSession to be retrieved.
+     * @return CareSession for the provided id, or null if none was found.
+     */
+    CareSessionEntity findCareSessionById(int idCareSession);
 }

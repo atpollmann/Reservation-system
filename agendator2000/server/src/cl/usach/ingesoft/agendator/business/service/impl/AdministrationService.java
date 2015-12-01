@@ -26,9 +26,9 @@ public class AdministrationService implements IAdministrationService {
 
     @Transactional
     @Override
-    public boolean cancelCareSession(CareSessionEntity careSession) {
-        CareSessionEntity cse = careSessionDao.findById(careSession.getId());
-        if (cse != null) {
+    public boolean cancelCareSession(int idCareSession) {
+        CareSessionEntity cse = careSessionDao.findById(idCareSession);
+        if (cse != null && cse.getValid()) {
             cse.setValid(false);
             careSessionDao.save(cse);
             careSessionDao.flush();
@@ -53,7 +53,19 @@ public class AdministrationService implements IAdministrationService {
 
     @Transactional
     @Override
+    public OngEntity findCurrentOng() {
+        return ongDao.findById(OngEntity.ONLY_ONE_ONG);
+    }
+
+    @Transactional
+    @Override
     public CareSessionEntity findCurrentCareSession(OngEntity ong, Date currentTime) {
         return careSessionDao.findByDate(ong.getId(), currentTime);
+    }
+
+    @Transactional
+    @Override
+    public CareSessionEntity findCareSessionById(int idCareSession) {
+        return careSessionDao.findById(idCareSession);
     }
 }

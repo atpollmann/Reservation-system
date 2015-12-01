@@ -1,8 +1,9 @@
 package cl.usach.ingesoft.agendator.controller;
 
+import cl.usach.ingesoft.agendator.business.dao.ISpecialityDao;
 import cl.usach.ingesoft.agendator.business.service.IUsersService;
 import cl.usach.ingesoft.agendator.business.validator.Validator;
-import cl.usach.ingesoft.agendator.entity.UserEntity;
+import cl.usach.ingesoft.agendator.entity.*;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,7 @@ public class UserController {
 
     @RequestMapping("/index.html")
     public ModelAndView index() {
-
         logger.info("handling default method");
-
         return new ModelAndView("frame")
                 .addObject("availableUser", null/*userAdministration.findAllUsers()*/)
                 .addObject("module", 7);

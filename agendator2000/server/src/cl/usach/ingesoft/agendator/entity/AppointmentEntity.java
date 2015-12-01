@@ -20,12 +20,12 @@ public class AppointmentEntity extends BaseEntity {
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "schedule", referencedColumnName = "id")
     public ScheduleEntity getSchedule() {return schedule;}
     public void setSchedule(ScheduleEntity schedule) {this.schedule = schedule;}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "patient", referencedColumnName = "id")
     public PatientEntity getPatient() {return patient;}
     public void setPatient(PatientEntity patient) {this.patient = patient;}

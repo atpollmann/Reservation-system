@@ -12,9 +12,4 @@ public class OngDao extends BaseDao<OngEntity, Integer> implements IOngDao {
     public OngDao() {
         super(OngEntity.class);
     }
-
-    @Override
-    public OngEntity findByEnclosingDate(Date date) {
-        return findOneByStatement("from OngEntity o where o.startDate");
-    }
 }

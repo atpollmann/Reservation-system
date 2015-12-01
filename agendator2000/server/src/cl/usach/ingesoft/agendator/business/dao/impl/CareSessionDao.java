@@ -16,8 +16,9 @@ public class CareSessionDao extends BaseDao<CareSessionEntity, Integer> implemen
     @Override
     public CareSessionEntity findByDate(int idOng, Date currentDate) {
         return findOneByStatement(
-                "from CareSessionEntity c join c.ong o where " +
-                "o.id = :idOng and c.starDate <= :currentDate and :currentDate <= c.endDate",
+                "from CareSessionEntity c where c.ong.id = :idOng " +
+                    "and c.startDate <= :currentDate " +
+                    "and :currentDate <= c.endDate",
                 "idOng", idOng,
                 "currentDate", currentDate
         );

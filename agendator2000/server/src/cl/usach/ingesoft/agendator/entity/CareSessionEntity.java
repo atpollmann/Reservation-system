@@ -2,6 +2,7 @@ package cl.usach.ingesoft.agendator.entity;
 
 import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
 import cl.usach.ingesoft.agendator.util.OmitInComparison;
+import cl.usach.ingesoft.agendator.util.OmitInToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,16 +19,13 @@ public class CareSessionEntity extends BaseEntity {
     private Date endDate;
     private Boolean valid;
 
-    @OmitInComparison
-    private List<ScheduleEntity> schedules;
-
     @Column(name = "id", nullable = false, insertable = true)
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Id
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ong", referencedColumnName = "id")
     public OngEntity getOng() { return ong;}
     public void setOng(OngEntity ong) {this.ong = ong;}
@@ -51,8 +49,4 @@ public class CareSessionEntity extends BaseEntity {
     @Basic
     public Boolean getValid() {return valid;}
     public void setValid(Boolean valid) {this.valid = valid;}
-
-    @OneToMany(mappedBy = "careSession", fetch = FetchType.LAZY)
-    public List<ScheduleEntity> getSchedules() {return schedules;}
-    public void setSchedules(List<ScheduleEntity> schedules) {this.schedules = schedules;}
 }

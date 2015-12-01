@@ -1,7 +1,6 @@
 package cl.usach.ingesoft.agendator.business.service;
 
 import cl.usach.ingesoft.agendator.entity.UserEntity;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

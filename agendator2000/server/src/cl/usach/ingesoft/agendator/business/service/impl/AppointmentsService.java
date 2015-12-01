@@ -21,10 +21,14 @@ public class AppointmentsService implements IAppointmentsService {
 
     @Transactional
     @Override
-    public boolean cancelAppointment(AppointmentEntity appointment) {
-        appointmentDao.delete(appointment);
+    public boolean cancelAppointment(int idAppointment) {
+        AppointmentEntity ae = appointmentDao.findById(idAppointment);
+        if (ae == null) {
+            return false;
+        }
+        appointmentDao.delete(ae);
         appointmentDao.flush();
-        return (appointmentDao.findById(appointment.getId()) == null);
+        return true;
     }
 
     @Transactional
