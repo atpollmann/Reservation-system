@@ -62,6 +62,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <!-- #################################### Spring Security ############################################# -->
 
     <!-- Recursos que pueden ser accesados sin autenticacion -->
+    <s:http pattern="/img/**" security="none" />
     <s:http pattern="/images/**" security="none" />
     <s:http pattern="/js/**" security="none" />
     <s:http pattern="/css/**" security="none" />
@@ -75,12 +76,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
             use-expressions="true"
             access-denied-page="/403.html"
             entry-point-ref="loginUrlAuthenticationEntryPoint" >
-        <!--
-        <s:form-login login-page="/login.html"
-                      login-processing-url="/loginProcess"
-                      default-target-url="/app/main/index.html"
-                      authentication-failure-url="/login.html?error=true" />
-        -->
+
         <s:custom-filter ref="usernamePasswordAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 
         <s:logout logout-url="/logout" logout-success-url="/login.html"/>
@@ -109,7 +105,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- bean 3: set the default target url here -->
     <bean id="customAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
-        <property name="defaultTargetUrl" value="/app/main/index.html" />
+        <property name="defaultTargetUrl" value="/app/my_calendar/index.html" />
     </bean>
 
     <s:authentication-manager alias="theAuthenticationManager">

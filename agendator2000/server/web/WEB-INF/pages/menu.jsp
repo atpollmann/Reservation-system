@@ -1,18 +1,20 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
-<%!
-    String menuMarker(boolean output){
-        return output ? "class=\"current\"" : "";
-    }
-%>
+<div class="masthead">
+    <h3 class="muted"><a href="../..">Agendator</a></h3>
 
-<% int m = RequestHelper.getInt(request, "module"); %>
+    <jsp:include page="header.jsp"/>
 
-<div id="templatemo_menu">
-    <ul>
-        <li><a href="../main/index.html"<%= menuMarker(m==0) %>>Home</a></li>
-        <li><a href="../user/all_users"<%= menuMarker(m==7) %>>Usuarios</a></li>
-    </ul>
-    <div class="cleaner"></div>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav">
+                    <li class="${menuName == 'my_calendar' ? 'active' : ''}"><a href="../my_calendar/index.html">Mi Calendario</a></li>
+                    <li class="${menuName == 'my_appointments' ? 'active' : ''}"><a href="../my_appointments/index.html">Mis Horas</a></li>
+                    <li class="${menuName == 'my_attentions' ? 'active' : ''}"><a href="../my_attentions/index.html">Mis Atenciones</a></li>
+                    <li class="${menuName == 'my_profile' ? 'active' : ''}"><a href="../my_profile/index.html">Mis Datos</a></li>
+                    <li class="${menuName == 'users' ? 'active' : ''}"><a href="../users/index.html">[Usuarios]</a></li>
+                    <li class="${menuName == 'contact' ? 'active' : ''}"><a href="../contact/index.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- /.navbar -->
 </div>
-<!-- end of templatemo_menu -->

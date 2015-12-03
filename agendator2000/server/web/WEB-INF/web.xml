@@ -11,7 +11,7 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/404.html</location>
+        <location>/not_found.html</location>
     </error-page>
 
     <!-- Spring Security -->

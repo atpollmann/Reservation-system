@@ -1,23 +1,26 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<div id="templatemo_main">
+<!-- Jumbotron -->
+<div class="jumbotron">
+    <h1>Error!</h1>
+    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+</div>
 
-    <div class="col_w900 col_w900_last">
-    
-        <div class="col_w100 float_l">
-            <div class="post_box">
-                <h2>Ha ocurrido un error</h2>
+<hr>
 
-                <br/>
-
-                Disculpe las molestias, este error ha sido registrado.
-            </div>
-          
-        </div>
-
-        <%--<jsp:include page="lateral.jsp"/>--%>
-        
-        <div class="cleaner"></div>
+<!-- Example row of columns -->
+<div class="row-fluid">
+    <div class="span4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn" href="#">View details &raquo;</a></p>
     </div>
-    
-    <div class="cleaner"></div>
-</div> <!-- end of main -->
+    <div class="span4">
+        <h2>Heading</h2>
+        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        <p><a class="btn" href="#">View details &raquo;</a></p>
+    </div>
+    <div class="span4">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+        <p><a class="btn" href="#">View details &raquo;</a></p>
+    </div>
+</div>

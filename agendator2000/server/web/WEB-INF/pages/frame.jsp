@@ -1,55 +1,110 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <title>Template &middot; Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>FC Barcelona Online</title>
+    <!-- Le styles -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 20px;
+            padding-bottom: 60px;
+        }
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content="fc barcelona online, fc, barcelona, online, equipo, futbol"/>
-    <meta name="description" content="Sistema administrativo web de FC Barcelona"/>
+        /* Custom container */
+        .container {
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+        .container > hr {
+            margin: 60px 0;
+        }
 
-    <link rel="stylesheet" type="text/css" href="../../css/templatemo_style.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/redmond/jquery-ui-1.10.3.custom.min.css"/>
+        /* Main marketing message and sign up button */
+        .jumbotron {
+            margin: 80px 0;
+            text-align: center;
+        }
+        .jumbotron h1 {
+            font-size: 100px;
+            line-height: 1;
+        }
+        .jumbotron .lead {
+            font-size: 24px;
+            line-height: 1.25;
+        }
+        .jumbotron .btn {
+            font-size: 21px;
+            padding: 14px 24px;
+        }
 
-    <script type="text/javascript" src="../../js/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="../../js/jquery-ui-1.10.3.custom.min.js"></script>
-    <script type="text/javascript" src="../../js/scripts.js"></script>
-    <script type="text/javascript" src="../../js/jquery.ui.datepicker-es.js"></script>
+        /* Supporting marketing content */
+        .marketing {
+            margin: 60px 0;
+        }
+        .marketing p + h4 {
+            margin-top: 28px;
+        }
 
-    <link rel="stylesheet" type="text/css" href="../../css/styles.css" media="screen"/>
-    <script type="text/javascript">
-        $(function(){
-            $('.button').button();
-        });
-    </script>
+
+        /* Customize the navbar links to be fill the entire space of the .navbar */
+        .navbar .navbar-inner {
+            padding: 0;
+        }
+        .navbar .nav {
+            margin: 0;
+            display: table;
+            width: 100%;
+        }
+        .navbar .nav li {
+            display: table-cell;
+            width: 1%;
+            float: none;
+        }
+        .navbar .nav li a {
+            font-weight: bold;
+            text-align: center;
+            border-left: 1px solid rgba(255,255,255,.75);
+            border-right: 1px solid rgba(0,0,0,.1);
+        }
+        .navbar .nav li:first-child a {
+            border-left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .navbar .nav li:last-child a {
+            border-right: 0;
+            border-radius: 0 3px 3px 0;
+        }
+    </style>
+    <link href="../../css/app.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.min.css" rel="stylesheet">
 
 </head>
-<body class="subpage">
 
-<div id="templatemo_wrapper">
+<body>
 
-    <jsp:include page="header.jsp"/>
+<div class="container">
 
     <jsp:include page="menu.jsp"/>
 
-    <jsp:include page="middle_subpage.jsp"/>
+    <jsp:include page="${contentName}.jsp"/>
 
-    <%
-        int m = RequestHelper.getInt(request, "module");
-        switch (m) {
-            case -1: %><jsp:include page="error.jsp"/><% break;
-            case 0: %><jsp:include page="main.jsp"/><% break;
-            case 7: %><jsp:include page="user.jsp"/><% break;
-        }
-    %>
+    <hr>
 
+    <jsp:include page="footer.jsp"/>
 
-</div>
-<!-- end of wrapper -->
+</div> <!-- /container -->
 
-<jsp:include page="footer.jsp"/>
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../../js/jquery-1.9.1.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
+<script src="../../js/app.js"></script>
 
 </body>
 </html>
