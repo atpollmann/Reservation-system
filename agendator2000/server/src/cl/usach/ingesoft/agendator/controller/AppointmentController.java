@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/my_calendar")
-public class MyCalendarController extends BaseController {
+@RequestMapping("/appointment")
+public class AppointmentController extends BaseController {
 
     @RequestMapping("/index.html")
     public ModelAndView index() {
         return newFrame()
-                .selectMenu("my_calendar")
-                .selectContent("view/main")
+                .selectMenu("appointment")
+                .selectContent("view/appointment")
                 .build();
     }
 

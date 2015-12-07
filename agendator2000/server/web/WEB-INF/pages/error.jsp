@@ -1,3 +1,4 @@
+<%@page contentType="text/html;charset=UTF-8"%>
 <!-- Jumbotron -->
 <div class="jumbotron">
     <h1>Error!</h1>

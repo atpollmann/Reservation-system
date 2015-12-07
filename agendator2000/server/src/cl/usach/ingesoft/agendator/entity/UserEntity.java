@@ -18,4 +18,8 @@ public class UserEntity  extends PersonEntity {
     @Basic
     public String getHashedPassword() {return hashedPassword;}
     public void setHashedPassword(String hashedPassword) {this.hashedPassword = hashedPassword;}
+
+    public boolean userIsAdministrator() {return false;}
+    public boolean userIsProfessional() {return false;}
+    public boolean userIsPatient() {return false;}
 }

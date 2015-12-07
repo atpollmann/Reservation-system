@@ -16,4 +16,7 @@ public class ProfessionalEntity extends UserEntity {
     @JoinColumn(name = "speciality", referencedColumnName = "id")
     public SpecialityEntity getSpeciality() {return speciality;}
     public void setSpeciality(SpecialityEntity speciality) {this.speciality = speciality;}
+
+    @Override
+    public boolean userIsProfessional() {return true;}
 }

@@ -13,7 +13,7 @@ public class ContactController extends BaseController {
     public ModelAndView index() {
         return newFrame()
                 .selectMenu("contact")
-                .selectContent("view/main")
+                .selectContent("view/contact")
                 .build();
     }
 

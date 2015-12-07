@@ -1,3 +1,5 @@
+<%@page contentType="text/html;charset=UTF-8"%>
+
 <div class="masthead">
     <h3 class="muted"><a href="../..">Agendator</a></h3>
 
@@ -7,12 +9,13 @@
         <div class="navbar-inner">
             <div class="container">
                 <ul class="nav">
-                    <li class="${menuName == 'my_calendar' ? 'active' : ''}"><a href="../my_calendar/index.html">Mi Calendario</a></li>
-                    <li class="${menuName == 'my_appointments' ? 'active' : ''}"><a href="../my_appointments/index.html">Mis Horas</a></li>
-                    <li class="${menuName == 'my_attentions' ? 'active' : ''}"><a href="../my_attentions/index.html">Mis Atenciones</a></li>
-                    <li class="${menuName == 'my_profile' ? 'active' : ''}"><a href="../my_profile/index.html">Mis Datos</a></li>
-                    <li class="${menuName == 'users' ? 'active' : ''}"><a href="../users/index.html">[Usuarios]</a></li>
+                    <li class="${menuName == 'calendar' ? 'active' : ''}"><a href="../calendar/index.html">Calendario</a></li>
+                    <li class="${menuName == 'appointment' ? 'active' : ''}"><a href="../appointment/index.html">Citas [for patient and professional]</a></li>
+                    <li class="${menuName == 'profile' ? 'active' : ''}"><a href="../profile/index.html">Perfil</a></li>
                     <li class="${menuName == 'contact' ? 'active' : ''}"><a href="../contact/index.html">Contacto</a></li>
+                    <li class="${menuName == 'professional' ? 'active' : ''}"><a href="../professional/index.html">[Disponibilidad for professional]</a></li>
+                    <li class="${menuName == 'user' ? 'active' : ''}"><a href="../user/index.html">[Usuario for admin]</a></li>
+                    <li class="${menuName == 'careSession' ? 'active' : ''}"><a href="../careSession/index.html">[Sesión for admin]</a></li>
                 </ul>
             </div>
         </div>

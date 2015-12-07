@@ -1,3 +1,5 @@
+<%@page contentType="text/html;charset=UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +84,14 @@
     </style>
     <link href="../../css/app.css" rel="stylesheet">
     <link href="../../css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../../css/fullcalendar.css" rel="stylesheet">
+    <link href="../../css/cupertino/jquery-ui.min.css" rel="stylesheet">
 
+    <script src="../../js/jquery-1.9.1.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/moment.min.js"></script>
+    <script src="../../js/fullcalendar.min.js"></script>
 </head>
 
 <body>
@@ -98,13 +107,6 @@
     <jsp:include page="footer.jsp"/>
 
 </div> <!-- /container -->
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="../../js/jquery-1.9.1.js"></script>
-<script src="../../js/bootstrap.min.js"></script>
-<script src="../../js/app.js"></script>
 
 </body>
 </html>

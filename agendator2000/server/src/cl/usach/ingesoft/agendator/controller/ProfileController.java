@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/my_profile")
-public class MyProfileController extends BaseController {
+@RequestMapping("/profile")
+public class ProfileController extends BaseController {
 
     @RequestMapping("/index.html")
     public ModelAndView index(
@@ -26,7 +26,7 @@ public class MyProfileController extends BaseController {
         UserEntity currentUser = getSessionUser(session);
 
         return newFrame()
-                .selectMenu("my_profile")
+                .selectMenu("profile")
                 .selectContent("view/profile")
                 .add("currentUser", currentUser)
                 .build();
