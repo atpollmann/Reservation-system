@@ -1,5 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
+<%@page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
 
-<%@ page import="org.springframework.security.core.userdetails.User" %>
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
-<span class="welcome">Bienvenido <b><%= ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername() %></b>, <a href="../../logout">salir</a></span>
+<span class="welcome">
+    Bienvenido
+    <span class="highlight"><%= RequestHelper.getUserEmail() %></span>,
+    <a href="../../logout">salir</a></span>

@@ -1,12 +1,15 @@
 package cl.usach.ingesoft.agendator.util;
 
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 public class RequestHelper {
-    public static int getInt(HttpServletRequest request, String attributeName) {
-        Object o = request.getAttribute(attributeName);
-        return (o instanceof Integer ? (Integer) o : 0);
+
+    public static String getUserEmail() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user != null) {
+            return user.getUsername();
+        }
+        return null;
     }
 }

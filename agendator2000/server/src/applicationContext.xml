@@ -105,7 +105,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- bean 3: set the default target url here -->
     <bean id="customAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
-        <property name="defaultTargetUrl" value="/app/my_calendar/index.html" />
+        <property name="defaultTargetUrl" value="/app/calendar/index.html" />
     </bean>
 
     <s:authentication-manager alias="theAuthenticationManager">

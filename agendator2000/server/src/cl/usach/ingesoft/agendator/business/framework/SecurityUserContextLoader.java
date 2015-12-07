@@ -16,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 
-//import cl.usach.ingesoft.agendator.business.service.IUserAdministrationService;
-
 @Service(value = "securityUserDetailsService")
 public class SecurityUserContextLoader implements UserDetailsService {
 

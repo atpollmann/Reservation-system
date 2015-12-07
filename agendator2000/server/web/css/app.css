@@ -1,3 +1,6 @@
 img.captcha{
     margin: 20px 75px;
 }
+.welcome .highlight {
+    font-weight: bold;
+}

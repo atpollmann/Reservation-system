@@ -42,10 +42,11 @@ public class BaseController {
         return modelAndView;
     }
 
-    protected void maybeCompleteSession(HttpSession session) {
+    public BaseController maybeCompleteSession(HttpSession session) {
         if (session.getAttribute("current_user") == null) {
             session.setAttribute("current_user", getCurrentUser());
         }
+        return this;
     }
 
     protected UserEntity getSessionUser(HttpSession session) {
