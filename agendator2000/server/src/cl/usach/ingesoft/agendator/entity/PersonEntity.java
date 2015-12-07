@@ -14,6 +14,7 @@ public class PersonEntity extends BaseEntity {
     private String lastName;
 
     @Column(name = "id", nullable = false, insertable = true)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Id
     public Integer getId() {return id;}
     public void setId(Integer id) {this.id = id;}

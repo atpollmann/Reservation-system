@@ -1,13 +1,11 @@
 package cl.usach.ingesoft.agendator.business.service.impl;
 
 import cl.usach.ingesoft.agendator.business.dao.*;
-import cl.usach.ingesoft.agendator.business.dao.base.ISequenceDao;
 import cl.usach.ingesoft.agendator.business.service.IUsersService;
 import cl.usach.ingesoft.agendator.entity.AdministratorEntity;
 import cl.usach.ingesoft.agendator.entity.PatientEntity;
 import cl.usach.ingesoft.agendator.entity.ProfessionalEntity;
 import cl.usach.ingesoft.agendator.entity.UserEntity;
-import cl.usach.ingesoft.agendator.entity.base.SequenceEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +17,6 @@ public class UsersService implements IUsersService {
 
     @Autowired private IUserDao userDao;
 
-    @Autowired private ISequenceDao sequenceDao;
-
     @Autowired private IAdministratorDao administratorDao;
     @Autowired private IProfessionalDao professionalDao;
     @Autowired private IPatientDao patientDao;
@@ -31,23 +27,17 @@ public class UsersService implements IUsersService {
         // hack to circumvent identities not being available for table-per-class implementation on BD
         // Generate id and save for Administrator
         if (AdministratorEntity.class.isAssignableFrom(user.getClass())) {
-            SequenceEntity se = sequenceDao.generate();
-            user.setId(se.getId());
             administratorDao.save((AdministratorEntity)user);
             administratorDao.flush();
             return user;
         }
         // Generate id and save for Professional
         else if (ProfessionalEntity.class.isAssignableFrom(user.getClass())) {
-            SequenceEntity se = sequenceDao.generate();
-            user.setId(se.getId());
             professionalDao.save((ProfessionalEntity)user);
             professionalDao.flush();
         }
         // Generate id and save for Patient
         else if (PatientEntity.class.isAssignableFrom(user.getClass())) {
-            SequenceEntity se = sequenceDao.generate();
-            user.setId(se.getId());
             patientDao.save((PatientEntity)user);
             patientDao.flush();
         } else {
