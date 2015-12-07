@@ -1,0 +1,55 @@
+-- MySQL dump 10.13  Distrib 5.6.26, for osx10.11 (x86_64)
+--
+-- Host: localhost    Database: agendator
+-- ------------------------------------------------------
+-- Server version	5.6.26
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `professional`
+--
+
+DROP TABLE IF EXISTS `professional`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `professional` (
+  `id` int(11) NOT NULL,
+  `speciality` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK34289E27DAC17FBF` (`speciality`),
+  KEY `FK34289E276AF0EAFB` (`id`),
+  CONSTRAINT `FK34289E276AF0EAFB` FOREIGN KEY (`id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK34289E27DAC17FBF` FOREIGN KEY (`speciality`) REFERENCES `speciality` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `professional`
+--
+
+LOCK TABLES `professional` WRITE;
+/*!40000 ALTER TABLE `professional` DISABLE KEYS */;
+INSERT INTO `professional` VALUES (81,43),(105,45),(232,45),(250,45),(306,45),(346,45),(406,45),(408,45),(6,79),(14,79),(16,79),(27,81),(56,81),(57,81),(107,81),(142,81),(49,83),(54,83),(386,83),(80,84),(230,84),(237,84),(55,98),(32,99);
+/*!40000 ALTER TABLE `professional` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-12-07  9:46:06
