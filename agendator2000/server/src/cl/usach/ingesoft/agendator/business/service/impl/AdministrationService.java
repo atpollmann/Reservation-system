@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AdministrationService implements IAdministrationService {
@@ -54,13 +55,25 @@ public class AdministrationService implements IAdministrationService {
     @Transactional
     @Override
     public OngEntity findCurrentOng() {
-        return ongDao.findById(OngEntity.ONLY_ONE_ONG);
+        return ongDao.findFirst();
     }
 
     @Transactional
     @Override
     public CareSessionEntity findCurrentCareSession(OngEntity ong, Date currentTime) {
         return careSessionDao.findByDate(ong.getId(), currentTime);
+    }
+
+    @Transactional
+    @Override
+    public List<CareSessionEntity> findAllCareSessions(int ongId) {
+        return careSessionDao.findByOng(ongId);
+    }
+
+    @Transactional
+    @Override
+    public List<CareSessionEntity> findPendingCareSessions(int ongId, Date currentDate) {
+        return careSessionDao.findPending(ongId, currentDate);
     }
 
     @Transactional

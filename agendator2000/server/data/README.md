@@ -7,3 +7,8 @@ To load into database
 To flush all tables
 
 ./flush.sh
+
+
+To specify other user/password/database use it like this:
+ ./load_params.sh <user> <password> <database>
+ ./flush_params.sh <user> <password> <database>

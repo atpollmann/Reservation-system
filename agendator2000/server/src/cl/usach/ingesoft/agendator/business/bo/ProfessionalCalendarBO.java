@@ -2,18 +2,27 @@ package cl.usach.ingesoft.agendator.business.bo;
 
 import cl.usach.ingesoft.agendator.entity.*;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProfessionalCalendarBO {
+public class ProfessionalCalendarBO implements Serializable{
 
-    public static class Pair<K, S> {
+    public static class Pair<K, S> implements Serializable {
         public Pair() {}
         public Pair(K schedule, S appointment) {
             this.schedule = schedule;
             this.appointment = appointment;
         }
-        public K schedule;
-        public S appointment;
+        private K schedule;
+        private S appointment;
+
+        public K getSchedule() {
+            return schedule;
+        }
+
+        public S getAppointment() {
+            return appointment;
+        }
 
         @Override
         public String toString() {

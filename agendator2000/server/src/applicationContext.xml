@@ -71,6 +71,8 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     <s:http pattern="/403.html" security="none" />
     <s:http pattern="/404.html" security="none" />
 
+    <s:global-method-security pre-post-annotations="enabled"/>
+
     <s:http
             auto-config="false"
             use-expressions="true"
@@ -79,7 +81,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
         <s:custom-filter ref="usernamePasswordAuthenticationFilter" position="FORM_LOGIN_FILTER" />
 
-        <s:logout logout-url="/logout" logout-success-url="/login.html"/>
+        <s:logout logout-url="/logout" logout-success-url="/login.html" delete-cookies="JSESSIONID"/>
 
         <s:intercept-url pattern="/**" access="isAuthenticated()"/>
 
@@ -93,10 +95,13 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
     <bean id="usernamePasswordAuthenticationFilter" class="cl.usach.ingesoft.agendator.business.framework.ExUsernamePasswordAuthenticationFilter">
         <property name="filterProcessesUrl" value="/loginProcess"/>
-        <property name="authenticationSuccessHandler" ref="customAuthenticationSuccessHandler"/>
+        <!--<property name="authenticationSuccessHandler" ref="customAuthenticationSuccessHandler"/>-->
+        <property name="authenticationSuccessHandler" ref="myAuthenticationSuccessHandler"/>
         <property name="authenticationFailureHandler" ref="customAuthenticationFailureHandler"/>
         <property name="authenticationManager" ref="theAuthenticationManager"/>
     </bean>
+
+    <bean id="myAuthenticationSuccessHandler" class="cl.usach.ingesoft.agendator.business.framework.ExCustomAuthenticationSuccessHandler"/>
 
     <!-- bean 2: set the default failure url here -->
     <bean id="customAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
@@ -104,12 +109,14 @@ http://www.springframework.org/schema/security/spring-security.xsd">
     </bean>
 
     <!-- bean 3: set the default target url here -->
-    <bean id="customAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+    <!--<bean id="customAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
         <property name="defaultTargetUrl" value="/app/calendar/index.html" />
-    </bean>
+    </bean>-->
 
     <s:authentication-manager alias="theAuthenticationManager">
-        <s:authentication-provider user-service-ref="securityUserDetailsService"/>
+        <s:authentication-provider user-service-ref="securityUserDetailsService">
+            <s:password-encoder hash="sha"/>
+        </s:authentication-provider>
     </s:authentication-manager>
 
     <!-- #################################### DB bootstrap ############################################# -->

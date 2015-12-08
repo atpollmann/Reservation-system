@@ -1,7 +1,6 @@
-<%@page contentType="text/html;charset=UTF-8"%>
-<%@page import="cl.usach.ingesoft.agendator.util.RequestHelper" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <span class="welcome">
     Bienvenido
-    <span class="highlight"><%= RequestHelper.getUserEmail() %></span>,
+    <span class="highlight">${currentUser.firstName} ${currentUser.lastName}</span><span class="wtodo">${currentUser.id} - ${currentUser.roleName}</span>,
     <a href="../../logout">salir</a></span>

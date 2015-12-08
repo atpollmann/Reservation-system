@@ -1,4 +1,5 @@
-<%@page contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <div class="footer">
-    <p>&copy; Company 2013</p>
+    <p>&copy; Agendator 2015</p>
 </div>

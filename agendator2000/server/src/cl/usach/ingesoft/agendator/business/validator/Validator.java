@@ -61,6 +61,11 @@ public class Validator {
         }
     }
 
+    public static void shouldBeEmpty(String value) {
+        if (!"".equals(value)) {
+            throw new BusinessException("Value should not be set.");
+        }
+    }
     public static void shouldNotBeEmpty(String username) {
         if (username == null || username.isEmpty()) {
             throw new BusinessException("Value cannot be empty.");
@@ -132,5 +137,45 @@ public class Validator {
         if (passwordStr.length() > 12) {
             throw new BusinessException("Password should have 12 characters or less");
         }
+    }
+
+    public static char getDv(String rutS) {
+        rutS = rutS.toLowerCase();
+        int factor = 2;
+        int calculoDV = 0;
+        for (int i = rutS.length()-1; i >= 0; i--) {
+            char r = rutS.charAt(i);
+            if (('0' <= r && r <= '9') || r == 'k') {
+                calculoDV += (r - '0') * factor;
+                factor++;
+                if (factor == 8){
+                    factor = 2;
+                }
+            } else {
+                throw new BusinessException("Invalid character for RUN: " + r);
+            }
+
+        }
+        calculoDV = 11 - (calculoDV % 11);
+        return (calculoDV == 10
+                ? 'K' : (calculoDV == 11
+                ? '0' : String.valueOf(calculoDV).charAt(0)));
+
+    }
+
+    public static int shouldBeValidRun(String runWithDv) {
+        runWithDv = runWithDv.replace("\\.", "").replace(" ", "");
+        String[] parts = runWithDv.split("-");
+        if (parts.length  != 2) {
+            throw new BusinessException(String.format("El RUN '%s' es invalido (debe ser de la forma xxxxx-x).", runWithDv));
+        }
+        if (parts[0].isEmpty() || parts[1].isEmpty()) {
+            throw new BusinessException(String.format("El RUN '%s' es invalido (debe ser de la forma xxxxx-x).", runWithDv));
+        }
+
+        if (getDv(parts[0]) != parts[1].charAt(0)) {
+            throw new BusinessException(String.format("El RUN '%s' es invalido (el digito verificador no coincide).", runWithDv));
+        }
+        return Integer.parseInt(parts[0]);
     }
 }

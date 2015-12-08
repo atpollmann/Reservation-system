@@ -30,7 +30,7 @@ public class AppointmentEntity extends BaseEntity {
     public PatientEntity getPatient() {return patient;}
     public void setPatient(PatientEntity patient) {this.patient = patient;}
 
-    @Column(name = "attended", nullable = false, insertable = true, updatable = true)
+    @Column(name = "attended", columnDefinition = "BIT", nullable = false, insertable = true, updatable = true)
     @Basic
     public Boolean getAttended() {return attended;}
     public void setAttended(Boolean attended) {this.attended = attended;}

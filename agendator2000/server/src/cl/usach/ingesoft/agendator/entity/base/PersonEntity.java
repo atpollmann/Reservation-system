@@ -1,5 +1,6 @@
-package cl.usach.ingesoft.agendator.entity;
+package cl.usach.ingesoft.agendator.entity.base;
 
+import cl.usach.ingesoft.agendator.business.validator.Validator;
 import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
 import cl.usach.ingesoft.agendator.util.OmitInComparison;
 
@@ -33,4 +34,9 @@ public class PersonEntity extends BaseEntity {
     @Basic
     public String getLastName() {return lastName;}
     public void setLastName(String lastName) {this.lastName = lastName;}
+
+    @Transient
+    public char getDv() {
+        return Validator.getDv(String.valueOf(run));
+    }
 }

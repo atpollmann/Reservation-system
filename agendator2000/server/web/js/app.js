@@ -1,8 +1,25 @@
+function padInteger(x, length) {
+    x = ''+x;
+    while(x.length < length) {
+        x = '0'+x;
+    }
+    return x;
+}
 function date_str(dateObj) {
     var yyyy = dateObj.year().toString();
-    var mm = dateObj.month().toString(); // getMonth() is zero-based
+    var MM = (dateObj.month()+1).toString(); // getMonth() is zero-based
     var dd  = dateObj.date().toString();
-    return yyyy  + '-' + (mm.length>1?mm:"0"+mm[0]) + '-' + (dd.length>1?dd:"0"+dd[0]);
+    return padInteger(yyyy, 4)  + '-' + padInteger(MM, 2) + '-' + padInteger(dd, 2);
+}
+
+function datetime_str(dateObj) {
+    var yyyy = dateObj.year().toString();
+    var MM = (dateObj.month()+1).toString(); // getMonth() is zero-based
+    var dd  = dateObj.date().toString();
+    var hh = dateObj.hour().toString();
+    var mm = dateObj.minute().toString();
+    var ss = dateObj.second().toString();
+    return padInteger(yyyy, 4)  + '-' + padInteger(MM, 2) + '-' + padInteger(dd, 2) + 'T' + padInteger(hh, 2) + ':' + padInteger(mm, 2) + ':' + padInteger(ss, 2);
 }
 
 function my_indexof(arr, elem, comparator) {

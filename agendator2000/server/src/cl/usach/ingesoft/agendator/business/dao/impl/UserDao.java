@@ -5,6 +5,8 @@ import cl.usach.ingesoft.agendator.business.dao.base.BaseDao;
 import cl.usach.ingesoft.agendator.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UserDao extends BaseDao<UserEntity, Integer> implements IUserDao {
 
@@ -17,5 +19,10 @@ public class UserDao extends BaseDao<UserEntity, Integer> implements IUserDao {
         return findOneByStatement("from UserEntity u where u.email = :email",
             "email", email
         );
+    }
+
+    @Override
+    public List<UserEntity> findAllOrderedById() {
+        return findByStatement("from UserEntity u order by u.id");
     }
 }

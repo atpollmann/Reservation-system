@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 
 public class BaseDao<T, S extends Serializable> extends HibernateDaoSupport implements IBaseDao<T, S> {
@@ -85,5 +86,25 @@ public class BaseDao<T, S extends Serializable> extends HibernateDaoSupport impl
     public void deleteAll() {
         Query query = session().createQuery("delete from " + persistentClass.getSimpleName());
         query.executeUpdate();
+    }
+
+    protected <M> String joinList(List<M> objs) {
+        if (objs == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        Iterator<M> itr = objs.iterator();
+        if (itr.hasNext()) {
+            M n = itr.next();
+            if (n != null) {
+                sb.append(String.valueOf(n));
+            }
+        }
+        while (itr.hasNext()) {
+            M n = itr.next();
+            sb.append(',');
+            sb.append(String.valueOf(n));
+        }
+        return sb.toString();
     }
 }

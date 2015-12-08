@@ -6,6 +6,7 @@ import cl.usach.ingesoft.agendator.entity.CareSessionEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class CareSessionDao extends BaseDao<CareSessionEntity, Integer> implements ICareSessionDao {
@@ -21,6 +22,21 @@ public class CareSessionDao extends BaseDao<CareSessionEntity, Integer> implemen
                     "and :currentDate <= c.endDate",
                 "idOng", idOng,
                 "currentDate", currentDate
+        );
+    }
+
+    @Override
+    public List<CareSessionEntity> findByOng(int ongId) {
+        return findByStatement("from CareSessionEntity c where c.ong.id = :id",
+                "id", ongId
+        );
+    }
+
+    @Override
+    public List<CareSessionEntity> findPending(int ongId, Date currentDate) {
+        return findByStatement("from CareSessionEntity c where c.ong.id = :id and :date <= c.endDate",
+                "id", ongId,
+                "date", currentDate
         );
     }
 }

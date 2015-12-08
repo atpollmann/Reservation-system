@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IAppointmentDao extends IBaseDao<AppointmentEntity, Integer> {
     List<AppointmentEntity> findByProfessionalByCareSession(int idProfessional, int idCareSession);
+    List<AppointmentEntity> findByProfessional(int idProfessional);
+    List<AppointmentEntity> findByPatient(int idPatient);
 }

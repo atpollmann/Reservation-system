@@ -1,6 +1,8 @@
 package cl.usach.ingesoft.agendator.entity;
 
 import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
+import cl.usach.ingesoft.agendator.entity.base.DateHelper;
+import cl.usach.ingesoft.agendator.util.DateUtils;
 import cl.usach.ingesoft.agendator.util.OmitInComparison;
 import cl.usach.ingesoft.agendator.util.OmitInToString;
 
@@ -45,4 +47,20 @@ public class ScheduleEntity extends BaseEntity {
     @Basic
     public Date getEndDate() {return endDate;}
     public void setEndDate(Date endDate) {this.endDate = endDate;}
+
+    @Transient
+    public String getJsonEventFormatted() {
+        return String.format(
+                "{id:'%d', start:'%s', end:'%s', title:'Disponible %d', constraint:'available', color:'darkgreen'}",
+                id,
+                DateUtils.formatIsoDateTime(startDate),
+                DateUtils.formatIsoDateTime(endDate),
+                id
+        );
+    }
+
+    @Transient
+    public DateHelper getDates() {
+        return new DateHelper(startDate, endDate);
+    }
 }

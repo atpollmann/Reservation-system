@@ -50,7 +50,7 @@ public class UsersService implements IUsersService {
     @Transactional
     @Override
     public List<UserEntity> findAllUsers() {
-        return userDao.findAll();
+        return userDao.findAllOrderedById();
     }
 
     @Transactional

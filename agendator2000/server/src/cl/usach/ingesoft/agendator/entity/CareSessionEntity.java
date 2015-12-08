@@ -1,10 +1,13 @@
 package cl.usach.ingesoft.agendator.entity;
 
 import cl.usach.ingesoft.agendator.entity.base.BaseEntity;
+import cl.usach.ingesoft.agendator.entity.base.DateHelper;
+import cl.usach.ingesoft.agendator.util.DateUtils;
 import cl.usach.ingesoft.agendator.util.OmitInComparison;
 import cl.usach.ingesoft.agendator.util.OmitInToString;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +18,7 @@ public class CareSessionEntity extends BaseEntity {
     private Integer id;
     private OngEntity ong;
     private String location;
+    private String address;
     private Date startDate;
     private Date endDate;
     private Boolean valid;
@@ -35,6 +39,11 @@ public class CareSessionEntity extends BaseEntity {
     public String getLocation() {return location;}
     public void setLocation(String location) {this.location = location;}
 
+    @Column(name = "address", nullable = false, insertable = true, updatable = true, length = 255)
+    @Basic
+    public String getAddress() {return address;}
+    public void setAddress(String address) {this.address = address;}
+
     @Column(name = "startDate", nullable = false, insertable = true, updatable = true)
     @Basic
     public Date getStartDate() {return startDate;}
@@ -45,8 +54,18 @@ public class CareSessionEntity extends BaseEntity {
     public Date getEndDate() {return endDate;}
     public void setEndDate(Date endDate) {this.endDate = endDate;}
 
-    @Column(name = "valid", nullable = false, insertable = true, updatable = true)
+    @Column(name = "valid", columnDefinition = "BIT", nullable = false, insertable = true, updatable = true)
     @Basic
     public Boolean getValid() {return valid;}
     public void setValid(Boolean valid) {this.valid = valid;}
+
+    @Transient
+    public long getDaysDuration() {
+        return (endDate.getTime() - startDate.getTime()) / 86400000;
+    }
+
+    @Transient
+    public DateHelper getDates() {
+        return new DateHelper(startDate, endDate);
+    }
 }

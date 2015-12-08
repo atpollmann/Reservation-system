@@ -4,3 +4,19 @@ img.captcha{
 .welcome .highlight {
     font-weight: bold;
 }
+
+.rounded_corners {
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border: 0px solid #eee;
+    background-color: #eee;
+
+
+    text-align: center;
+    padding: 20px;
+}
+
+.wtodo {
+    color: red;
+}

@@ -33,10 +33,8 @@ public interface IProfessionalsService {
      * @param idProfessional Id of the Professional for which the schedule is to be created.
      * @param idCareSession Id of the CareSession for which the schedule is to be created.
      * @param schedules Time allocations for which the professional will work on the specified CareSession.
-     * @return non-null ProfessionalCalendar with the just added information.
      */
-    ProfessionalCalendarBO setScheduleForProfessional(int idProfessional, int idCareSession,
-            List<ScheduleEntity> schedules);
+    void saveScheduleForProfessional(int idProfessional, int idCareSession, List<ScheduleEntity> schedules);
 
     /**
      * Gets the list of specialities for this application.
@@ -50,4 +48,6 @@ public interface IProfessionalsService {
      * @return Non-null speciality if exists, or null if none was found.
      */
     SpecialityEntity findSpecialityById(int id);
+
+    void parseAndSaveSchedules(int idCareSession, int idProfessional, String allSchedules);
 }

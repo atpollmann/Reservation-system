@@ -1,10 +1,13 @@
-<%@page contentType="text/html;charset=UTF-8"%>
+<%@ page import="java.net.URLDecoder" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Template &middot; Bootstrap</title>
+    <title>Agendator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -88,6 +91,7 @@
     <link href="../../css/cupertino/jquery-ui.min.css" rel="stylesheet">
 
     <script src="../../js/jquery-1.9.1.js"></script>
+    <script src="../../js/jquery-ui-1.10.3.custom.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/app.js"></script>
     <script src="../../js/moment.min.js"></script>
@@ -99,6 +103,34 @@
 <div class="container">
 
     <jsp:include page="menu.jsp"/>
+
+    <c:if test="${not empty errorStr}">
+        <script type="text/javascript">
+            $(function() {
+                var errorDelay = 5000;
+                setTimeout(function () {
+                    $('#frame_error_container').fadeOut();
+                }, errorDelay);
+            });
+        </script>
+        <div id="frame_error_container" class="alert alert-danger" role="alert">
+            <strong>Error!</strong> <%= URLDecoder.decode(String.valueOf(request.getAttribute("errorStr")), "UTF-8") %>
+        </div>
+    </c:if>
+
+    <c:if test="${not empty okStr}">
+        <script type="text/javascript">
+            $(function() {
+                var okDelay = 5000;
+                setTimeout(function () {
+                    $('#frame_ok_container').fadeOut();
+                }, okDelay);
+            });
+        </script>
+        <div id="frame_ok_container" class="alert alert-success" role="alert">
+            <strong>Ok!</strong> <%= URLDecoder.decode(String.valueOf(request.getAttribute("okStr")), "UTF-8") %>
+        </div>
+    </c:if>
 
     <jsp:include page="${contentName}.jsp"/>
 

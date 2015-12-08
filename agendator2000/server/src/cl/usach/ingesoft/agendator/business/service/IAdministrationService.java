@@ -4,6 +4,7 @@ import cl.usach.ingesoft.agendator.entity.CareSessionEntity;
 import cl.usach.ingesoft.agendator.entity.OngEntity;
 
 import java.util.Date;
+import java.util.List;
 
 public interface IAdministrationService {
     /**
@@ -47,6 +48,10 @@ public interface IAdministrationService {
      * @return CareSession for the supplied parameters (or null if none was found).
      */
     CareSessionEntity findCurrentCareSession(OngEntity ong, Date currentTime);
+
+    List<CareSessionEntity> findAllCareSessions(int ongId);
+
+    List<CareSessionEntity> findPendingCareSessions(int ongId, Date currentDate);
 
     /**
      *
