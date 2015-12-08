@@ -63,4 +63,8 @@ public class DateHelper implements Serializable {
     public String getIsoEndTime() {
         return formatIsoTime(endDate);
     }
+
+    public long getDaysDuration() {
+        return (endDate.getTime() - startDate.getTime()) / 86400000;
+    }
 }

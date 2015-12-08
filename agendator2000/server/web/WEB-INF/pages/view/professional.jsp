@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style type="text/css">
     .fc-agendaWeek-view tr {
@@ -61,6 +60,7 @@
         $(calendarContainer).fullCalendar('renderEvent', event, true);
     }
     function showRemoveEventDialog(calEvent) {
+        var oldColor = calEvent.color;
         setColor(calEvent, 'orange');
         showDialog('Quitará una hora del calendario.<br/>Continuar?', {
             "Borrar hora": function() {
@@ -71,7 +71,7 @@
                 $(dialogConfirm).dialog("close");
             },
             "Cancelar": function() {
-                setColor(calEvent, 'blue');
+                setColor(calEvent, oldColor);
                 $(dialogConfirm).dialog("close");
             }
         });
@@ -113,7 +113,7 @@
             views: {
                 doubleWeekSantiago:{
                     type:'agendaWeek',
-                    duration: { days:${careSession.daysDuration} }
+                    duration: { days:${careSession.dates.daysDuration} }
                 }
             },
             businessHours:false,
@@ -181,7 +181,12 @@
                 }
                 // database saved schedules
                 <c:forEach items="${calendar.freeSchedules}" var="sched">
-                ,${sched.jsonEventFormatted}
+                ,${sched.jsonEventFormattedFree}
+                </c:forEach>
+
+                // database taken appointments
+                <c:forEach items="${calendar.takenAppointments}" var="pair">
+                ,${pair.schedule.jsonEventFormattedTaken}
                 </c:forEach>
             ],
             allDaySlot: false,
@@ -231,12 +236,12 @@
         </tbody>
     </table>
 
-    <h3 style="text-align: left;">Horas</h3>
+    <h3 style="text-align: left;">Horas Disponibles</h3>
     <sub>Click en la zona verde para ingresar bloques horarios. También puede arrastrar y redimensionar.</sub>
     <br/>
     <sub>
         <span style="color:blue;font-weight:bold;">Azul: bloques nuevos</span>
-        <span style="color:darkgreen;font-weight:bold;">Verde: bloques guardados</span>
+        <span style="color:darkgreen;font-weight:bold;">Verde: bloques libres</span>
         <span style="color:darkred;font-weight:bold;">Rojo: bloques con citas</span>
     </sub>
     <div id="dialog-confirm" title="Cancelar hora" style="display: none;">

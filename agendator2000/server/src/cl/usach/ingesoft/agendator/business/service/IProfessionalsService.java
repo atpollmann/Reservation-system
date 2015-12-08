@@ -26,6 +26,7 @@ public interface IProfessionalsService {
      * @return non-null ProfessionalCalendar for the parameters provided.
      */
     ProfessionalCalendarBO getProfessionalCalendar(int idProfessional, int idCareSession);
+    ProfessionalCalendarBO getProfessionalCalendar(int idProfessional);
 
     /**
      * Operation 13.

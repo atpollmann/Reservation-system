@@ -60,11 +60,6 @@ public class CareSessionEntity extends BaseEntity {
     public void setValid(Boolean valid) {this.valid = valid;}
 
     @Transient
-    public long getDaysDuration() {
-        return (endDate.getTime() - startDate.getTime()) / 86400000;
-    }
-
-    @Transient
     public DateHelper getDates() {
         return new DateHelper(startDate, endDate);
     }

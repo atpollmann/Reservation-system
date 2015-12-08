@@ -14,5 +14,7 @@ public interface IScheduleDao extends IBaseDao<ScheduleEntity, Integer> {
 
     List<ScheduleEntity> findByProfessionalByCareSession(int idProfessional, int idCareSession);
 
+    List<ScheduleEntity> findByProfessional(int idProfessional);
+
     void deleteSchedulesWithAppointments(List<Integer> ids);
 }

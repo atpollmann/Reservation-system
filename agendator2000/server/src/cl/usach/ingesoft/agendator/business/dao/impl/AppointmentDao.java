@@ -17,8 +17,8 @@ public class AppointmentDao extends BaseDao<AppointmentEntity, Integer> implemen
     @Override
     public List<AppointmentEntity> findByProfessionalByCareSession(int idProfessional, int idCareSession) {
         return findByStatement(
-                "from AppointmentEntity a " +
-                        "where a.schedule.id = :idProfessional and a.schedule.careSession.id = :idCareSession",
+                "from AppointmentEntity a where a.schedule.professional.id = :idProfessional " +
+                        "and a.schedule.careSession.id = :idCareSession",
                 "idProfessional", idProfessional,
                 "idCareSession", idCareSession
         );

@@ -26,9 +26,9 @@ public class AppointmentsService implements IAppointmentsService {
     @Transactional
     @Override
     public boolean cancelAppointment(int idUser, int idAppointment) {
-        // only the provided idUser can delete its appointments
+        // only the provided idUser can delete its appointments or the professional
         AppointmentEntity ae = appointmentDao.findById(idAppointment);
-        if (ae.getPatient().getId() != idUser) {
+        if (ae.getPatient().getId() != idUser && ae.getSchedule().getProfessional().getId() != idUser) {
             return false;
         }
         if (ae == null) {

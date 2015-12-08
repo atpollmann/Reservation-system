@@ -52,4 +52,18 @@ public class DateUtils {
     public static Date tryParse(String isoDateTime) throws ParseException {
         return ISO_SDF_DATETIME.parse(isoDateTime);
     }
+
+    public static Date maxForDates(Date a, Date b) {
+        if (a.after(b)) {
+            return a;
+        }
+        return b;
+    }
+
+    public static Date minForDates(Date a, Date b) {
+        if (a.after(b)) {
+            return b;
+        }
+        return a;
+    }
 }

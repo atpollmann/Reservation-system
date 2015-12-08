@@ -33,21 +33,28 @@ public class ProfessionalsService implements IProfessionalsService {
         return professionalDao.findByCareSession(idCareSession);
     }
 
-    @Transactional
-    @Override
-    public ProfessionalCalendarBO getProfessionalCalendar(int idProfessional, int idCareSession) {
+    private ProfessionalCalendarBO buildProfessionalCalendar(int idProfessional, Integer idCareSession) {
         ProfessionalEntity professional = professionalDao.findById(idProfessional);
-        CareSessionEntity careSession = careSessionDao.findById(idCareSession);
-
         Validator.shouldBeFound(professional);
-        Validator.shouldBeFound(careSession);
+
+        CareSessionEntity careSession = null;
+
+        if (idCareSession != null) {
+            careSession = careSessionDao.findById(idCareSession);
+            Validator.shouldBeFound(careSession);
+        }
 
         List<ScheduleEntity> frees = new ArrayList();
         List<Pair<ScheduleEntity, AppointmentEntity>> taken = new ArrayList();
 
-        List<ScheduleEntity> allSchedules = scheduleDao.findByProfessionalByCareSession(idProfessional, idCareSession);
-        List<AppointmentEntity> allAppointments = appointmentDao.findByProfessionalByCareSession(idProfessional,
-                idCareSession);
+        List<ScheduleEntity> allSchedules = (idCareSession == null ?
+                scheduleDao.findByProfessional(idProfessional) :
+                scheduleDao.findByProfessionalByCareSession(idProfessional, idCareSession)
+        );
+        List<AppointmentEntity> allAppointments = (idCareSession == null ?
+                appointmentDao.findByProfessional(idProfessional) :
+                appointmentDao.findByProfessionalByCareSession(idProfessional, idCareSession)
+        );
 
         // allAppointments should be a subset of allSchedules
 
@@ -70,6 +77,18 @@ public class ProfessionalsService implements IProfessionalsService {
         }
 
         return new ProfessionalCalendarBO(careSession, professional, frees, taken);
+    }
+
+    @Transactional
+    @Override
+    public ProfessionalCalendarBO getProfessionalCalendar(int idProfessional, int idCareSession) {
+        return buildProfessionalCalendar(idProfessional, idCareSession);
+    }
+
+    @Transactional
+    @Override
+    public ProfessionalCalendarBO getProfessionalCalendar(int idProfessional) {
+        return buildProfessionalCalendar(idProfessional, null);
     }
 
     @Transactional

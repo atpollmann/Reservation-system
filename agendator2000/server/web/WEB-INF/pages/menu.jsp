@@ -16,12 +16,12 @@
                         <li class="${menuName == 'user' ? 'active' : ''}"><a href="../user/index.html">[Usuarios]</a></li>
                     </c:if>
                     <c:if test="${currentUser.isProfessional||currentUser.isPatient}">
-                        <li class="${menuName == 'calendar' ? 'active' : ''}"><a href="../calendar/index.html">[Calendario]</a></li>
+                        <li class="${menuName == 'calendar' ? 'active' : ''}"><a href="../calendar/index.html">Calendario</a></li>
                     </c:if>
                     <li class="${menuName == 'appointment' ? 'active' : ''}"><a href="../appointment/index.html">Citas</a></li>
                     <li class="${menuName == 'profile' ? 'active' : ''}"><a href="../profile/index.html">Perfil</a></li>
                     <c:if test="${currentUser.isProfessional}">
-                        <li class="${menuName == 'professional' ? 'active' : ''}"><a href="../professional/index.html">[Disponibilidad]</a></li>
+                        <li class="${menuName == 'professional' ? 'active' : ''}"><a href="../professional/index.html">Disponibilidad</a></li>
                     </c:if>
                     <c:if test="${currentUser.isPatient}">
                         <li class="${menuName == 'contact' ? 'active' : ''}"><a href="../contact/index.html">Contacto</a></li>

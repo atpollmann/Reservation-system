@@ -97,11 +97,10 @@ public class ProfessionalController extends BaseController {
 
             professionalsService.parseAndSaveSchedules(idCareSession, user.getId(), allSchedules);
 
-            return defaultSuccessPage("index.html", "Disponibilidad actualizada!");
+            return defaultSuccessPage("index.html?idCareSession=" + cse.getId(), "Disponibilidad actualizada!");
         } catch (Exception e) {
             e.printStackTrace();
             return defaultErrorPage(e);
         }
     }
-
 }

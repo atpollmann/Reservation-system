@@ -49,13 +49,24 @@ public class ScheduleEntity extends BaseEntity {
     public void setEndDate(Date endDate) {this.endDate = endDate;}
 
     @Transient
-    public String getJsonEventFormatted() {
+    public String getJsonEventFormattedFree() {
+        return getJsonFormatted("Disponible " + id, "darkgreen");
+    }
+
+    @Transient
+    public String getJsonEventFormattedTaken() {
+        return getJsonFormatted("Cita " + id, "darkred");
+    }
+
+    @Transient
+    private String getJsonFormatted(String title, String color) {
         return String.format(
-                "{id:'%d', start:'%s', end:'%s', title:'Disponible %d', constraint:'available', color:'darkgreen'}",
+                "{id:'%d', start:'%s', end:'%s', constraint:'available', color:'%s', title:'%s'}",
                 id,
                 DateUtils.formatIsoDateTime(startDate),
                 DateUtils.formatIsoDateTime(endDate),
-                id
+                color,
+                title
         );
     }
 

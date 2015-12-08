@@ -40,6 +40,14 @@ public class ScheduleDao extends BaseDao<ScheduleEntity, Integer> implements ISc
     }
 
     @Override
+    public List<ScheduleEntity> findByProfessional(int idProfessional) {
+        return findByStatement(
+                "from ScheduleEntity s where s.professional.id = :idProfessional",
+                "idProfessional", idProfessional
+        );
+    }
+
+    @Override
     public void deleteSchedulesWithAppointments(List<Integer> ids) {
         // Delete attached Appointments to mantain referential integrity
         Query query = session().createQuery("delete from AppointmentEntity a where a.schedule.id in (:ids)");

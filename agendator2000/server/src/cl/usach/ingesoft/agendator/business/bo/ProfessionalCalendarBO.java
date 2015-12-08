@@ -1,8 +1,12 @@
 package cl.usach.ingesoft.agendator.business.bo;
 
 import cl.usach.ingesoft.agendator.entity.*;
+import cl.usach.ingesoft.agendator.entity.base.DateHelper;
+import cl.usach.ingesoft.agendator.util.DateUtils;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class ProfessionalCalendarBO implements Serializable{
@@ -35,6 +39,9 @@ public class ProfessionalCalendarBO implements Serializable{
     private List<ScheduleEntity> freeSchedules;
     private List<Pair<ScheduleEntity, AppointmentEntity> > takenAppointments;
 
+    private Date minDate;
+    private Date maxDate;
+
     public ProfessionalCalendarBO() {
     }
 
@@ -60,6 +67,42 @@ public class ProfessionalCalendarBO implements Serializable{
 
     public List<Pair<ScheduleEntity, AppointmentEntity> > getTakenAppointments() {
         return takenAppointments;
+    }
+
+    private void maybeCalculateMinMaxDates() {
+        if (minDate == null && maxDate == null) {
+            if (freeSchedules.size() > 0) {
+                // Iterate first over the free schedules, collecting the minDate,maxDate
+                Iterator<ScheduleEntity> itr = freeSchedules.iterator();
+                if (itr.hasNext()) {
+                    ScheduleEntity n = itr.next();
+                    minDate = n.getStartDate();
+                    maxDate = n.getEndDate();
+                }
+                while(itr.hasNext()) {
+                    ScheduleEntity n = itr.next();
+                    minDate = DateUtils.minForDates(minDate, n.getStartDate());
+                    maxDate = DateUtils.maxForDates(maxDate, n.getEndDate());
+                }
+                // Iterate then over the taken appointments
+                Iterator<Pair<ScheduleEntity, AppointmentEntity>> itr2 = takenAppointments.iterator();
+                if (itr2.hasNext()) {
+                    Pair<ScheduleEntity, AppointmentEntity> p = itr2.next();
+                    minDate = DateUtils.minForDates(minDate, p.schedule.getStartDate());
+                    maxDate = DateUtils.maxForDates(maxDate, p.schedule.getEndDate());
+                }
+                while(itr2.hasNext()) {
+                    Pair<ScheduleEntity, AppointmentEntity> p = itr2.next();
+                    minDate = DateUtils.minForDates(minDate, p.schedule.getStartDate());
+                    maxDate = DateUtils.maxForDates(maxDate, p.schedule.getEndDate());
+                }
+            }
+        }
+    }
+
+    public DateHelper getDates() {
+        maybeCalculateMinMaxDates();
+        return new DateHelper(minDate, maxDate);
     }
 
     @Override
